@@ -35,6 +35,16 @@ html {
 
 .wrapper {
   display: flex;
+
+  &__content {
+    padding-left: 60px;
+    border-left: 1px solid;
+    height: 100vh;
+  }
 }
 
+a {
+  text-decoration: none;
+  color: initial;
+}
 

@@ -2,6 +2,7 @@ import React, { MouseEvent, useState } from 'react';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { AccountCircle, Chat, ExpandLess, ExpandMore, Forum, Group, LineStyle } from '@mui/icons-material';
 import './Navbar.scss';
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const navItems = [
@@ -21,7 +22,7 @@ const Navbar = () => {
       id: 2,
       title: 'Доска',
       icon: <LineStyle/>,
-      link: '/'
+      link: '/dashboard'
     }
   ];
   const chatNames = [
@@ -59,16 +60,18 @@ const Navbar = () => {
   return (
     <List sx={{ width: '100%', maxWidth: 360, marginRight: '50px' }}>
       {navItems.map((item, index) => (
-        <ListItemButton
-          key={`${item}_${index}`}
-          selected={selectedNavItemId === item.id}
-          onClick={e => onNavItemClick(e, item.id)}
-        >
-          <ListItemIcon>
-            {item.icon}
-          </ListItemIcon>
-          <ListItemText primary={item.title}/>
-        </ListItemButton>
+        <Link to={item.link}>
+          <ListItemButton
+            key={`${item}_${index}`}
+            selected={selectedNavItemId === item.id}
+            onClick={e => onNavItemClick(e, item.id)}
+          >
+            <ListItemIcon>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText primary={item.title}/>
+          </ListItemButton>
+        </Link>
       ))}
 
       <ListItemButton onClick={onIsOpenClick}>
@@ -82,17 +85,19 @@ const Navbar = () => {
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {chatNames.map((item, index) => (
-            <ListItemButton
-              sx={{ pl: 4 }}
-              key={`${item}_${index}`}
-              selected={selectedChatNameId === item.id}
-              onClick={e => onChatNameClick(e, item.id)}
-            >
-              <ListItemIcon>
-                <Chat/>
-              </ListItemIcon>
-              <ListItemText primary={item.title}/>
-            </ListItemButton>
+            <Link to={`/chats/${item.id + 1}`}>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                key={`${item}_${index}`}
+                selected={selectedChatNameId === item.id}
+                onClick={e => onChatNameClick(e, item.id)}
+              >
+                <ListItemIcon>
+                  <Chat/>
+                </ListItemIcon>
+                <ListItemText primary={item.title}/>
+              </ListItemButton>
+            </Link>
           ))}
         </List>
       </Collapse>

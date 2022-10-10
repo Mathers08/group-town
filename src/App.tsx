@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.scss';
 import { Header, Navbar } from "./components";
-import { NavTabs } from "./pages";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import { Dashboard, GroupList, Profile } from "./pages";
 
 const darkTheme = createTheme({
   palette: {
@@ -17,7 +18,13 @@ const App = () => {
         <Header/>
       <div className='wrapper'>
         <Navbar/>
-        <NavTabs/>
+        <div className='wrapper__content'>
+          <Routes>
+            <Route path='/profile' element={<Profile/>}/>
+            <Route path='/group' element={<GroupList/>}/>
+            <Route path='/dashboard' element={<Dashboard/>}/>
+          </Routes>
+        </div>
       </div>
     </ThemeProvider>
   );
