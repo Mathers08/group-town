@@ -1,20 +1,9 @@
 import React from 'react';
-import {
-  Avatar,
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  CssBaseline,
-  FormControlLabel,
-  Grid,
-  Link,
-  TextField,
-  Typography
-} from '@mui/material';
+import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Copyright } from "../components";
+import { Link } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -44,32 +33,28 @@ const SignIn = () => {
             <LockOutlinedIcon/>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Вход в Group Town
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+              autoFocus
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Ваша почта"
               name="email"
               autoComplete="email"
-              autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Пароль"
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary"/>}
-              label="Remember me"
             />
             <Button
               type="submit"
@@ -77,17 +62,12 @@ const SignIn = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Войти
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+            <Grid container justifyContent="center">
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link to="/signup" style={{ color: '#1976d2', textDecoration: 'underline' }}>
+                  У вас еще нет аккаунта? Зарегистрируйтесь!
                 </Link>
               </Grid>
             </Grid>

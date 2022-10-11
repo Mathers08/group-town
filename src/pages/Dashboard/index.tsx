@@ -27,7 +27,7 @@ const Dashboard = () => {
         <TabPanel value="2"><TodoList/></TabPanel>
         <TabPanel value="3">Item 3</TabPanel>
         <TabPanel value="4"><Progress/></TabPanel>
-        <TabPanel value="5"><Schedule/></TabPanel>
+        <TabPanel value="5" sx={{ padding: '24px 0' }}><Schedule/></TabPanel>
       </TabContext>
     </Box>
   );

@@ -11,7 +11,7 @@ const darkTheme = createTheme({
   },
 });
 
-const isAuth = true;
+const isAuth = false;
 
 const App = () => {
   return (

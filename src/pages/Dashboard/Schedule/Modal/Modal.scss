@@ -1,0 +1,88 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: .5;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+
+.modal {
+  text-align: center;
+  z-index: 100;
+  position: relative;
+  margin: 10rem auto;
+  border-radius: 20px;
+  max-width: 300px;
+  padding: 2rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  font-size: .9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 3px;
+  padding: .3rem 1rem;
+  cursor: pointer;
+}
+
+.modal-close-button {
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-add-button {
+  margin: 20px 0 0 0;
+}
+
+.circle-picker {
+  display: flex;
+  justify-content: center;
+  margin-right: -14px;
+  margin-bottom: -14px;
+}
+
+.circle {
+  width: 28px;
+  height: 28px;
+  margin-right: 14px;
+  margin-bottom: 14px;
+}
+
+.color {
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  border-radius: 50%;
+}
+
+.color-blue {
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(88, 97, 226, 0.698));
+}
+.color-green {
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(55, 255, 0, 0.719));
+}
+.color-red {
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(230, 57, 57, 0.883));
+}
