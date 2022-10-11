@@ -1,7 +1,6 @@
 import React, { MouseEvent, useState } from 'react';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { AccountCircle, Chat, ExpandLess, ExpandMore, Forum, Group, LineStyle } from '@mui/icons-material';
-import './Navbar.scss';
 import { Link } from "react-router-dom";
 
 const Navbar = () => {

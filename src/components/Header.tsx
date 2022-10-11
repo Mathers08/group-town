@@ -94,10 +94,10 @@ const Header = () => {
             </Menu>
           </Box>*/}
           <Stack spacing={2} direction="row">
-            <Link to='/login'>
+            <Link to='/signup'>
               <Button variant="outlined">Зарегестрироваться</Button>
             </Link>
-            <Link to='/signup'>
+            <Link to='/login'>
               <Button variant="contained">Войти</Button>
             </Link>
           </Stack>

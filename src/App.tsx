@@ -29,8 +29,8 @@ const App = () => {
           </div>
         </div> :
         <Routes>
-          <Route path="/login" element={<SignIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/login" element={<SignIn/>}/>
         </Routes>
       }
     </ThemeProvider>
