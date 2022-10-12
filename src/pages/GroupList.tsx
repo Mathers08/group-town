@@ -52,7 +52,7 @@ const rows = [
 
 const GroupList = () => {
   return (
-    <Box sx={{ height: 632, width: '65vw' }}>
+    <Box sx={{ height: 631, width: '65vw' }}>
       <DataGrid
         rows={rows}
         columns={columns}

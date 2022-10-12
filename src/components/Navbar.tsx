@@ -59,9 +59,8 @@ const Navbar = () => {
   return (
     <List sx={{ width: '100%', maxWidth: 360, marginRight: '50px' }}>
       {navItems.map((item, index) => (
-        <Link to={item.link}>
+        <Link to={item.link} key={`${item}_${index}`}>
           <ListItemButton
-            key={`${item}_${index}`}
             selected={selectedNavItemId === item.id}
             onClick={e => onNavItemClick(e, item.id)}
           >
@@ -84,10 +83,9 @@ const Navbar = () => {
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {chatNames.map((item, index) => (
-            <Link to={`/chats/${item.id + 1}`}>
+            <Link to={`/chats/${item.id + 1}`} key={`${item}_${index}`}>
               <ListItemButton
                 sx={{ pl: 4 }}
-                key={`${item}_${index}`}
                 selected={selectedChatNameId === item.id}
                 onClick={e => onChatNameClick(e, item.id)}
               >

@@ -5,17 +5,31 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import { Dashboard, GroupList, Profile, SignIn, SignUp } from "./pages";
 
-const darkTheme = createTheme({
+const theme = createTheme({
   palette: {
     mode: 'light',
   },
+  typography: {
+    fontFamily: [
+      'Poppins',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  }
 });
 
-const isAuth = false;
+const isAuth = true;
 
 const App = () => {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline/>
       <Header/>
       {isAuth ? <div className="wrapper">

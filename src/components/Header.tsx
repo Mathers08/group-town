@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { AccountCircle, Group, LineStyle, Logout } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import {logo1, logo2} from '../assets';
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -56,15 +57,26 @@ const Header = () => {
           display: 'flex',
           justifyContent: 'space-between',
         }}>
-          <Typography
-            variant="h4"
-            component="a"
-            href="/dashboard"
-            sx={{ fontFamily: 'monospace' }}
-          >
-            Group Town
-          </Typography>
-
+          <div>
+            <img src={logo1} alt=""/>
+            <Typography
+              variant="h4"
+              component="a"
+              href="/dashboard"
+              sx={{ fontFamily: 'monospace', letterSpacing: -1 }}
+            >
+              roup
+            </Typography>
+            <img src={logo2} alt=""/>
+            <Typography
+              variant="h4"
+              component="a"
+              href="/dashboard"
+              sx={{ fontFamily: 'monospace', letterSpacing: -1, marginLeft: '-7px' }}
+            >
+              own
+            </Typography>
+          </div>
           {/*<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
