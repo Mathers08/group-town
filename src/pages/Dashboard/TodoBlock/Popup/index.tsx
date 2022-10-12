@@ -4,8 +4,6 @@ import "./Popup.scss";
 import { useAppDispatch } from "../../../../hooks";
 import { ITodo } from "../../../../redux/todos/types";
 import { editTodo } from "../../../../redux/todos/slice";
-import { useSelector } from "react-redux";
-import { selectTodos } from "../../../../redux/todos/selectors";
 
 type PopupProps = ITodo & {
   isEditModalActive: boolean;
@@ -52,16 +50,10 @@ const Popup: FC<PopupProps> = ({ id, title, content, isComplete, isEditModalActi
           value={contentEdit}
           onChange={onContentChange}
           className="pop-up__content"
-        ></textarea>
+        />
         <div className="pop-up__buttons">
-          <button type="submit" className="pop-up__button ok">
-            Сохранить
-          </button>
-          <button
-            type="submit"
-            onClick={(e) => handleSubmit(e, false)}
-            className="pop-up__button no"
-          >
+          <button type="submit" className="pop-up__button ok">Сохранить</button>
+          <button type="submit" className="pop-up__button no" onClick={(e) => handleSubmit(e, false)}>
             Отменить
           </button>
         </div>

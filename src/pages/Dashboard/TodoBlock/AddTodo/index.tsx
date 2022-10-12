@@ -43,7 +43,7 @@ const AddTask = () => {
       </div>
       <form onSubmit={handleSubmit} className="add-task__inputs">
         <div>
-          <p className="add-task__lether-count">{title.length}/50</p>
+          <p className="add-task__lether-count">{title.length} / 50</p>
           <input
             maxLength={50}
             value={title}
@@ -54,7 +54,7 @@ const AddTask = () => {
           />
         </div>
         <div>
-          <p className="add-task__lether-count">{content.length}/75</p>
+          <p className="add-task__lether-count">{content.length} / 100</p>
           <textarea
             maxLength={75}
             value={content}

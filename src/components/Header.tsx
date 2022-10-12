@@ -57,12 +57,11 @@ const Header = () => {
           display: 'flex',
           justifyContent: 'space-between',
         }}>
-          <div>
+          <Link to='/dashboard'>
             <img src={logo1} alt=""/>
             <Typography
               variant="h4"
               component="a"
-              href="/dashboard"
               sx={{ fontFamily: 'monospace', letterSpacing: -1 }}
             >
               roup
@@ -71,12 +70,11 @@ const Header = () => {
             <Typography
               variant="h4"
               component="a"
-              href="/dashboard"
               sx={{ fontFamily: 'monospace', letterSpacing: -1, marginLeft: '-7px' }}
             >
               own
             </Typography>
-          </div>
+          </Link>
           {/*<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
