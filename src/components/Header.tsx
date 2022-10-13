@@ -51,12 +51,9 @@ const Header = () => {
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
   return (
-    <AppBar position="static" color="transparent">
+    <AppBar position="static" sx={{ background: 'transparent', boxShadow: 'none'}}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}>
+        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Link to='/dashboard'>
             <img src={logo1} alt=""/>
             <Typography

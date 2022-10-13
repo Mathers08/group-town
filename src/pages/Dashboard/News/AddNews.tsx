@@ -8,6 +8,7 @@ import { useAppDispatch } from "../../../hooks";
 import { v4 as uuidv4 } from 'uuid';
 import { INews } from "../../../redux/news/types";
 import { addNews } from "../../../redux/news/slice";
+import { Link } from "react-router-dom";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
