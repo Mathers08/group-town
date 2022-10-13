@@ -39,24 +39,9 @@ const TodoList = () => {
       <div className="tasks__container">
         <AnimatePresence>
           {todos.length ? (
-            all ? todos.map(todo => (
-                <TodoItem
-                  key={todo.id}
-                  id={todo.id}
-                  title={todo.title}
-                  content={todo.content}
-                  isComplete={todo.isComplete}
-                />
-              )
-            ) : doneTodos.map(todo => (
-              <TodoItem
-                key={todo.id}
-                id={todo.id}
-                title={todo.title}
-                content={todo.content}
-                isComplete={todo.isComplete}
-              />
-            ))
+            all
+              ? todos.map(todo => <TodoItem key={todo.id} {...todo}/>)
+              : doneTodos.map(todo => <TodoItem key={todo.id} {...todo}/>)
           ) : <h4 className="nothing">На данный момент у вас нет задач!</h4>}
         </AnimatePresence>
       </div>

@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import todos from './todos/slice';
+import news from './news/slice';
 
 export const setupStore = () => configureStore({
   reducer: {
-    todos
+    todos,
+    news
   },
 });
 
