@@ -1,0 +1,39 @@
+.news {
+  &__header {
+    font-size: 38px;
+    margin: 20px 0 16px 32px;
+
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 40px;
+
+    &-item {
+      width: 47%;
+      background-color: #d3d3d3;
+      padding: 32px;
+      border-radius: 8px;
+
+      .item__importance {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: -webkit-fill-available;
+        border-radius: 8px 8px 0 0;
+        height: 30px;
+        background: linear-gradient(rgb(255 0 0), #d3d3d3);
+      }
+
+      .item__title {
+        margin: 0;
+      }
+
+      .item__text {
+
+      }
+    }
+  }
+}
