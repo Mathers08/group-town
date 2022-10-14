@@ -9,7 +9,6 @@ import { deleteNews } from "../../../redux/news/slice";
 const NewsItem = ({ id, title, content, importance }: INews) => {
   const dispatch = useAppDispatch();
   const slicedContent = content.slice(0, 180);
-
   const onDeleteClick = (id: string) => dispatch(deleteNews(id));
 
   return (

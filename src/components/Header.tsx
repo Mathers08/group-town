@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   AppBar,
   Avatar,
   Box,
+  Button,
   Container,
   IconButton,
   ListItemIcon,
   Menu,
   MenuItem,
+  Stack,
   Toolbar,
   Tooltip,
-  Typography,
-  Stack,
-  Button
+  Typography
 } from '@mui/material';
 import { AccountCircle, Group, LineStyle, Logout } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import {logo1, logo2} from '../assets';
+import { logo1, logo2 } from '../assets';
 
-const Header = () => {
+interface HeaderProps {
+  isAuth: boolean;
+}
+
+const Header: FC<HeaderProps> = ({ isAuth }) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const settings = [
     {
@@ -43,7 +47,7 @@ const Header = () => {
       id: 3,
       title: 'Выйти',
       icon: <Logout/>,
-      link: '/'
+      link: '/login'
     }
   ];
 
@@ -54,60 +58,52 @@ const Header = () => {
     <AppBar position="static" sx={{ background: 'transparent' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Link to='/dashboard'>
+          <Link to="/dashboard" style={{ display: 'flex' }}>
             <img src={logo1} alt=""/>
-            <Typography
-              variant="h4"
-              component="a"
-              sx={{ fontFamily: 'monospace', letterSpacing: -1 }}
-            >
-              roup
-            </Typography>
+            <h1 style={{ fontFamily: 'monospace', letterSpacing: -1 }}>roup</h1>
             <img src={logo2} alt=""/>
-            <Typography
-              variant="h4"
-              component="a"
-              sx={{ fontFamily: 'monospace', letterSpacing: -1, marginLeft: '-7px' }}
-            >
-              own
-            </Typography>
+            <h1 style={{ fontFamily: 'monospace', marginLeft: '-7px' }}>own</h1>
           </Link>
-          {/*<Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <Link to={setting.link}>
-                  <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
-                    <ListItemIcon>{setting.icon}</ListItemIcon>
-                    <Typography>{setting.title}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
-            </Menu>
-          </Box>*/}
-          <Stack spacing={2} direction="row">
-            <Link to='/signup'>
-              <Button variant="outlined">Зарегистрироваться</Button>
-            </Link>
-            <Link to='/login'>
-              <Button variant="contained">Войти</Button>
-            </Link>
-          </Stack>
+          {isAuth
+            ?
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <Link to={setting.link} key={setting.id}>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <ListItemIcon>{setting.icon}</ListItemIcon>
+                      <Typography>{setting.title}</Typography>
+                    </MenuItem>
+                  </Link>
+                ))}
+              </Menu>
+            </Box>
+            :
+            <Stack spacing={2} direction="row">
+              <Link to="/signup">
+                <Button variant="outlined">Зарегистрироваться</Button>
+              </Link>
+              <Link to="/login">
+                <Button variant="contained">Войти</Button>
+              </Link>
+            </Stack>
+          }
         </Toolbar>
       </Container>
     </AppBar>

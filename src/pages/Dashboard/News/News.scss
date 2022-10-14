@@ -83,6 +83,9 @@
     }
 
     &-importance {
+      h4 {
+        margin: 15px 0;
+      }
       .importance {
         display: flex;
         gap: 25px;
@@ -93,9 +96,6 @@
           cursor: pointer;
           padding-bottom: 5px;
 
-          p {
-            margin: 0;
-          }
           .circle {
             margin: 0;
             width: 20px;
@@ -138,7 +138,6 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
   }
 }
 

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Home.scss';
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+interface HomeProps {
+  isAuth: boolean;
+}
+
+const Home: FC<HomeProps> = ({ isAuth }) => {
   return (
     <div className="home">
       <div className="home__wrapper">
@@ -14,7 +18,7 @@ const Home = () => {
         <div className="home__wrapper-bottom">
           <p>Удобный инструмент для вас и ваших друзей</p>
           <h3>Начните прямо сейчас!</h3>
-          <Link to="/login">
+          <Link to={isAuth ? '/dashboard' : '/login'}>
             <Button variant="contained" sx={{ fontFamily: 'cursive', fontSize: '20px', borderRadius: '25px' }}>
               Начать
             </Button>

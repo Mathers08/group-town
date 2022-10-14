@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { Header, Navbar } from "./components";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Dashboard, GroupList, Home, Profile, SignIn, SignUp } from "./pages";
 
 const theme = createTheme({
@@ -28,17 +28,18 @@ const theme = createTheme({
 const isAuth = true;
 
 const App = () => {
+  const location = useLocation();
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/login" element={<SignIn/>}/>
+        <Route path="/" element={<Home isAuth={isAuth}/>}/>
       </Routes>
-      <ThemeProvider theme={theme}>
-        <CssBaseline/>
-        {isAuth && <>
-          <Header/>
+      {isAuth && location.pathname !== '/'
+        ?
+        <>
+          <Header isAuth={isAuth}/>
           <div className="wrapper">
             <Navbar/>
             <div className="wrapper__content">
@@ -50,9 +51,13 @@ const App = () => {
             </div>
           </div>
         </>
-        }
-      </ThemeProvider>
-    </>
+        :
+        <Routes>
+          <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/login" element={<SignIn/>}/>
+        </Routes>
+      }
+    </ThemeProvider>
   );
 };
 

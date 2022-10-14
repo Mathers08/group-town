@@ -8,6 +8,7 @@ import { useAppDispatch } from "../../../hooks";
 import { v4 as uuidv4 } from 'uuid';
 import { INews } from "../../../redux/news/types";
 import { addNews } from "../../../redux/news/slice";
+import { formatDate } from "../../../utils";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
@@ -45,7 +46,8 @@ const AddNews = () => {
       id: uuidv4(),
       title,
       content,
-      importance
+      importance,
+      createdAt: formatDate(new Date)
     };
     if (title.trim() !== "" && content.trim() !== "" && importance !== '') {
       dispatch(addNews(newItem));
