@@ -1,15 +1,26 @@
 import React from 'react';
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import './News.scss';
 import { INews } from "../../../redux/news/types";
+import { Close } from '@mui/icons-material';
+import { useAppDispatch } from "../../../hooks";
+import { deleteNews } from "../../../redux/news/slice";
 
-const NewsItem = ({ id, title, content }: INews) => {
+const NewsItem = ({ id, title, content, importance }: INews) => {
+  const dispatch = useAppDispatch();
+  const slicedContent = content.slice(0, 180);
+
+  const onDeleteClick = (id: string) => dispatch(deleteNews(id));
+
   return (
     <div className="news__list-item">
-      <span className="item__importance"/>
-      <h2 className="item__title">{title}</h2>
-      <p className="item__text">{content}</p>
-      <Button variant="contained">Читать дальше</Button>
+      <span className="item__importance" style={{ background: `linear-gradient(${importance}, #d3d3d3)` }}/>
+      <div className="item__title">
+        <h2>{title}</h2>
+        <IconButton><Close onClick={() => onDeleteClick(id)}/></IconButton>
+      </div>
+      <p className="item__text">{content.length > 185 ? slicedContent + '...' : content}</p>
+      {content.length > 185 && <Button variant="contained">Читать дальше</Button>}
     </div>
   );
 };

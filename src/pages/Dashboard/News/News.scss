@@ -1,3 +1,5 @@
+@import "../../../App";
+
 .news {
   max-width: 930px;
 
@@ -26,11 +28,15 @@
         width: -webkit-fill-available;
         border-radius: 8px 8px 0 0;
         height: 25px;
-        background: linear-gradient(rgb(255 0 0), #d3d3d3);
       }
 
       .item__title {
-        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        h2 {
+          margin: 0;
+        }
       }
 
       .item__text {
@@ -39,4 +45,106 @@
       }
     }
   }
+}
+
+.addNews {
+  background-color: $primary;
+  padding: 30px 50px;
+  border-radius: 15px;
+  color: whitesmoke;
+
+  &__title {
+    display: flex;
+    place-items: center;
+    gap: 10px;
+
+    &-text {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .news-input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &-importance {
+      .importance {
+        display: flex;
+        gap: 25px;
+        &__item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          padding-bottom: 5px;
+
+          p {
+            margin: 0;
+          }
+          .circle {
+            margin: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+          }
+
+          .green-circle {
+            background-color: green;
+
+          }
+
+          .yellow-circle {
+            background-color: yellow;
+
+          }
+
+          .red-circle {
+            background-color: red;
+
+          }
+        }
+      }
+    }
+
+    &-content {
+      resize: none;
+      height: 120px;
+    }
+
+    &-submit {
+      margin-top: 10px;
+      width: 250px;
+      font-size: 18px;
+      margin-inline: auto;
+      padding: 8px;
+      color: white;
+      border: 2px solid white;
+      background-color: transparent;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+  }
+}
+
+.empty {
+  font-weight: 600;
+  font-size: 22px;
+  margin-top: 20px;
+  margin-left: 50px;
 }
