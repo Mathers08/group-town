@@ -11,7 +11,7 @@ const NewsList = () => {
     <div className="news__list">
       {news.length ? news.map(n => (
         <NewsItem key={n.id} {...n}/>
-      )) : <h4 className='empty'>Новостей нет!</h4>}
+      )) : <h4 className="empty">Новостей нет!</h4>}
     </div>
   );
 };

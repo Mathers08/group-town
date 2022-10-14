@@ -4,6 +4,7 @@ import { Header, Navbar } from "./components";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Dashboard, GroupList, Home, Profile, SignIn, SignUp } from "./pages";
+import FullNews from "./pages/Dashboard/News/FullNews";
 
 const theme = createTheme({
   palette: {
@@ -47,6 +48,7 @@ const App = () => {
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/group" element={<GroupList/>}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
+                <Route path="/news/:id" element={<FullNews/>}/>
               </Routes>
             </div>
           </div>

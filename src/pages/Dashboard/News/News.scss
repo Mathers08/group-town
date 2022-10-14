@@ -34,12 +34,14 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         h2 {
           margin: 0;
         }
       }
 
       .item__text {
+        margin: 10px 0;
         max-height: 123px;
         overflow: hidden;
       }
@@ -86,9 +88,11 @@
       h4 {
         margin: 15px 0;
       }
+
       .importance {
         display: flex;
         gap: 25px;
+
         &__item {
           display: flex;
           align-items: center;
@@ -146,4 +150,44 @@
   font-size: 22px;
   margin-top: 20px;
   margin-left: 50px;
+}
+
+.full {
+  max-width: 930px;
+  margin: 25px 0;
+  padding: 30px 50px 45px;
+  background-color: lightgrey;
+  border-radius: 40px;
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+
+    &-title {
+      max-width: 700px;
+      line-height: 1;
+      font-size: 44px;
+    }
+
+    &-line {
+      margin: 0 auto;
+      width: 150px;
+      height: 5px;
+    }
+  }
+
+  &__main {
+    margin-top: 30px;
+    &-info {
+      font-family: monospace;
+
+    }
+
+    &-content {
+
+    }
+  }
 }

@@ -5,6 +5,7 @@ import { INews } from "../../../redux/news/types";
 import { Close } from '@mui/icons-material';
 import { useAppDispatch } from "../../../hooks";
 import { deleteNews } from "../../../redux/news/slice";
+import { Link } from "react-router-dom";
 
 const NewsItem = ({ id, title, content, importance }: INews) => {
   const dispatch = useAppDispatch();
@@ -19,7 +20,11 @@ const NewsItem = ({ id, title, content, importance }: INews) => {
         <IconButton><Close onClick={() => onDeleteClick(id)}/></IconButton>
       </div>
       <p className="item__text">{content.length > 185 ? slicedContent + '...' : content}</p>
-      {content.length > 185 && <Button variant="contained">Читать дальше</Button>}
+      {content.length > 185 &&
+        <Link to={`/news/${id}`}>
+          <Button variant="contained">Читать дальше</Button>
+        </Link>
+      }
     </div>
   );
 };

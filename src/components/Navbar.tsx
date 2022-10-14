@@ -43,10 +43,10 @@ const Navbar = () => {
     },
   ];
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedNavItemId, setSelectedNavItemId] = useState(2);
-  const [selectedChatNameId, setSelectedChatNameId] = useState(-1);
-
   const onIsOpenClick = () => setIsOpen(!isOpen);
+/*  const [selectedNavItemId, setSelectedNavItemId] = useState(2);
+
+  const [selectedChatNameId, setSelectedChatNameId] = useState(-1);
   const onNavItemClick = (e: MouseEvent<HTMLDivElement>, id: number) => {
     setSelectedNavItemId(id);
     setSelectedChatNameId(-1);
@@ -54,15 +54,13 @@ const Navbar = () => {
   const onChatNameClick = (e: MouseEvent<HTMLDivElement>, id: number) => {
     setSelectedChatNameId(id);
     setSelectedNavItemId(-1);
-  };
+  };*/
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, marginRight: '50px' }}>
       {navItems.map((item, index) => (
         <Link to={item.link} key={`${item}_${index}`}>
           <ListItemButton
-            selected={selectedNavItemId === item.id}
-            onClick={e => onNavItemClick(e, item.id)}
           >
             <ListItemIcon>
               {item.icon}
@@ -86,8 +84,6 @@ const Navbar = () => {
             <Link to={`/chats/${item.id + 1}`} key={`${item}_${index}`}>
               <ListItemButton
                 sx={{ pl: 4 }}
-                selected={selectedChatNameId === item.id}
-                onClick={e => onChatNameClick(e, item.id)}
               >
                 <ListItemIcon>
                   <Chat/>
