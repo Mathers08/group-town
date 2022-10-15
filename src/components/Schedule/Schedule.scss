@@ -1,39 +1,85 @@
-.table {
-  height: 755px;
+.main {
+  display: flex;
+
+  &__couples {
+    max-height: 715px;
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+
+    &-item {
+      flex: 1 1 115px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 140px;
+      padding: 5px;
+      border-radius: 5px 25px;
+      background: -webkit-linear-gradient(rgb(171 167 167 / 90%), rgb(255 255 255));
+      border: 3px outset white;
+      text-align: center;
+      cursor: pointer;
+      empty-cells: hide;
+      height: 115px;
+    }
+  }
+
+  &__time {
+    display: flex;
+    flex-direction: column;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 115px;
+    }
+  }
 }
 
-.time {
-  padding: 10px 15px;
-}
-
-// Couple
-td {
+.days {
+  display: flex;
   text-align: center;
-  cursor: pointer;
+}
+
+.group, .main__time-item, .days__item {
+  width: 140px;
+  padding: 5px;
   border-radius: 5px 25px;
-  padding: 10px 25px;
+  background: -webkit-linear-gradient(rgb(171 167 167 / 90%), rgb(255 255 255));
   border: 3px outset white;
-  empty-cells: hide;
-  height: 115px;
+}
 
-  &:hover {
-    background-color: rgba(88, 88, 96, 0.85);
-    transition: .3s;
+.colors {
+  display: flex;
+  justify-content: center;
+  margin: 5px -14px -14px 0;
+
+  .circle {
+    width: 28px;
+    height: 28px;
+    margin-right: 14px;
+    margin-bottom: 14px;
+  }
+
+  .color {
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    border-radius: 50%;
+  }
+
+  &-blue {
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(88, 97, 226, 0.698));
+  }
+
+  &-green {
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(55, 255, 0, 0.719));
+  }
+
+  &-red {
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(230, 57, 57, 0.883));
   }
 }
 
 
-// Table top
-.group {
-  background: -webkit-linear-gradient(rgb(108 108 108 / 90%), rgb(246 246 246));
-}
-
-tr {
-  th {
-    min-width: 140px;
-    padding: 5px;
-    border-radius: 5px 25px;
-    background: -webkit-linear-gradient(rgb(171 167 167 / 90%), rgb(255 255 255));
-    border: 3px outset white;
-  }
-}

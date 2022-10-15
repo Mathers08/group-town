@@ -1,66 +1,110 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
+import { Close } from "@mui/icons-material";
+import { Button, IconButton } from "@mui/material";
+import { CoupleColorEnum, ICouple } from "../../redux/schedule/types";
+import { useAppDispatch } from "../../hooks";
+import Modal from "../Modal";
 import './Schedule.scss';
-import Modal from "./Modal";
-import { useColor, useModal } from "../../hooks";
+import { editCouple } from "../../redux/schedule/slice";
 
-const Couple = () => {
-  const { color, setColor } = useColor();
-  const newColor = color.modal;
-  const { isModalActive, onModalClick } = useModal();
-  const [background, setBackground] = useState('#d2cccc');
+type CoupleProps = ICouple;
+
+const Couple: FC<CoupleProps> = ({ id, subject, audience, lecturer, coupleColor }) => {
+  const dispatch = useAppDispatch();
+
   const [isTyping, setIsTyping] = useState(false);
-  const [data, setData] = useState({
-    subject: '',
-    office: '',
-    teacher: ''
-  });
-  const subjectChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsTyping(true);
-    setData({ ...data, subject: e.target.value });
-  };
-  const officeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsTyping(true);
-    setData({ ...data, office: e.target.value });
-  };
-  const teacherChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsTyping(true);
-    setData({ ...data, teacher: e.target.value });
-  };
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [editSubject, setEditSubject] = useState(subject);
+  const [editAudience, setEditAudience] = useState(audience);
+  const [editLecturer, setEditLecturer] = useState(lecturer);
+  const [editColor, setEditColor] = useState<CoupleColorEnum>(CoupleColorEnum.DEFAULT);
+  const textColor = coupleColor === CoupleColorEnum.DEFAULT
+  && editColor === CoupleColorEnum.DEFAULT ? '#000' : 'whitesmoke';
 
-  const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
+  const onModalClick = () => setIsModalActive(!isModalActive);
+  const onSubjectChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsTyping(true);
+    setEditSubject(e.target.value);
+  };
+  const onAudienceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsTyping(true);
+    setEditAudience(e.target.value);
+  };
+  const onLecturerChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsTyping(true);
+    setEditLecturer(e.target.value);
+  };
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     onModalClick();
-    setData({
-      subject: data.subject,
-      office: data.office,
-      teacher: data.teacher
-    });
+    const editedCouple: ICouple = {
+      id,
+      subject: editSubject,
+      audience: editAudience,
+      lecturer: editLecturer,
+      coupleColor: editColor
+    };
+    dispatch(editCouple(editedCouple));
     setIsTyping(false);
-    setBackground(color.modal);
+    setEditColor(editColor);
   };
 
-  const Info = () => <>{data.subject}<br/>{data.office}<br/>{data.teacher}</>;
+  const Info = () => <p style={{ color: textColor }}>{editSubject}<br/>{editAudience}<br/>{editLecturer}</p>;
 
   return (
-    <>
-      <td onClick={onModalClick} style={{ background: background }}>
+    <div>
+      <td className="main__couples-item" onClick={onModalClick}
+          style={{ background: editColor }}>
         {!isTyping ? <Info/> : <br/>}
+        {isModalActive &&
+          <Modal active={isModalActive} setActive={setIsModalActive} color={editColor}>
+            <div className="coupleModal">
+              <div className="coupleModal__top">
+                <IconButton><Close onClick={onModalClick}/></IconButton>
+              </div>
+              <form onSubmit={handleSubmit}>
+                <h3 style={{ color: textColor }}>Предмет</h3>
+                <input
+                  autoFocus
+                  type="text"
+                  maxLength={16}
+                  value={editSubject}
+                  onChange={onSubjectChange}
+                />
+                <h3 style={{ color: textColor }}>Кабинет</h3>
+                <input
+                  type="text"
+                  maxLength={16}
+                  value={editAudience}
+                  onChange={onAudienceChange}
+                />
+                <h3 style={{ color: textColor }}>Преподаватель</h3>
+                <input
+                  type="text"
+                  maxLength={16}
+                  value={editLecturer}
+                  onChange={onLecturerChange}
+                />
+                <div>
+                  <h3 style={{ color: textColor }}>Выберите цвет</h3>
+                  <div className="colors">
+                    <div className="circle color colors-blue"
+                         onClick={() => setEditColor(CoupleColorEnum.BLUE)}/>
+                    <div className="circle color colors-green"
+                         onClick={() => setEditColor(CoupleColorEnum.GREEN)}/>
+                    <div className="circle color colors-red"
+                         onClick={() => setEditColor(CoupleColorEnum.RED)}/>
+                  </div>
+                </div>
+                <Button type="submit" variant="contained" color="inherit" sx={{ mt: '15px' }}>Добавить</Button>
+              </form>
+            </div>
+          </Modal>
+        }
       </td>
-      {isModalActive &&
-        <Modal
-          isModalActive={isModalActive}
-          hide={onModalClick}
-          subject={data.subject}
-          office={data.office}
-          teacher={data.teacher}
-          subjectChange={subjectChange}
-          officeChange={officeChange}
-          teacherChange={teacherChange}
-          handleSubmit={handleSubmit}
-        />
-      }
-    </>
+    </div>
   );
 };
 
 export default Couple;
+

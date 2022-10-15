@@ -16,6 +16,8 @@ const Popup: FC<PopupProps> = ({ id, title, content, isComplete, isEditModalActi
   const [contentEdit, setContentEdit] = useState(content);
 
   const onUpdateClick = (obj: ITodo) => dispatch(editTodo(obj));
+  const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitleEdit(e.target.value);
+  const onContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => setContentEdit(e.target.value);
   const handleSubmit = (e: any, isOk: boolean) => {
     e.preventDefault();
     if (isOk) {
@@ -26,13 +28,10 @@ const Popup: FC<PopupProps> = ({ id, title, content, isComplete, isEditModalActi
         isComplete
       };
       onUpdateClick(updatedTodo);
-      console.log(updatedTodo);
       toast.success("Задача успешно отредактирована!");
     }
     setIsEditModalActive(false);
   };
-  const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitleEdit(e.target.value);
-  const onContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => setContentEdit(e.target.value);
 
   return (
     <div className={isEditModalActive ? "pop-up pop-up-show" : "pop-up"}>

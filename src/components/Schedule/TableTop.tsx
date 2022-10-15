@@ -12,14 +12,14 @@ const TableTop = () => {
   ]
 
   return (
-    <tr>
-      <th className="group">ММИО</th>
+    <div className='days'>
+      <div className="group">ММИО</div>
       {days.map(day => (
-        <th key={day} className="days">
+        <p key={day} className="days__item">
           {day}
-        </th>
+        </p>
       ))}
-    </tr>
+    </div>
   );
 };
 
