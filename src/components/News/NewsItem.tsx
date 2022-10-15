@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, IconButton } from "@mui/material";
 import './News.scss';
-import { INews } from "../../../redux/news/types";
+import { INews } from "../../redux/news/types";
 import { Close } from '@mui/icons-material';
-import { useAppDispatch } from "../../../hooks";
-import { deleteNews } from "../../../redux/news/slice";
+import { useAppDispatch } from "../../hooks";
+import { deleteNews } from "../../redux/news/slice";
 import { Link } from "react-router-dom";
 
 const NewsItem = ({ id, title, content, importance }: INews) => {

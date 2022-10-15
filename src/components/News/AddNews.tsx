@@ -4,11 +4,11 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./News.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../hooks";
 import { v4 as uuidv4 } from 'uuid';
-import { INews } from "../../../redux/news/types";
-import { addNews } from "../../../redux/news/slice";
-import { formatDate } from "../../../utils";
+import { INews } from "../../redux/news/types";
+import { addNews } from "../../redux/news/slice";
+import { formatDate } from "../../utils";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();

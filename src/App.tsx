@@ -6,6 +6,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { Dashboard, GroupList, Home, Profile, SignIn, SignUp } from "./pages";
 import FullNews from "./pages/Dashboard/News/FullNews";
 
+// a.split(' ').slice(0, 2).map(e => e[0]).join('');
 const theme = createTheme({
   palette: {
     mode: 'light',

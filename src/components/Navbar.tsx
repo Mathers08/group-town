@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { AccountCircle, Chat, ExpandLess, ExpandMore, Forum, Group, LineStyle } from '@mui/icons-material';
 import { Link } from "react-router-dom";
@@ -44,24 +44,12 @@ const Navbar = () => {
   ];
   const [isOpen, setIsOpen] = useState(true);
   const onIsOpenClick = () => setIsOpen(!isOpen);
-/*  const [selectedNavItemId, setSelectedNavItemId] = useState(2);
-
-  const [selectedChatNameId, setSelectedChatNameId] = useState(-1);
-  const onNavItemClick = (e: MouseEvent<HTMLDivElement>, id: number) => {
-    setSelectedNavItemId(id);
-    setSelectedChatNameId(-1);
-  };
-  const onChatNameClick = (e: MouseEvent<HTMLDivElement>, id: number) => {
-    setSelectedChatNameId(id);
-    setSelectedNavItemId(-1);
-  };*/
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, marginRight: '50px' }}>
       {navItems.map((item, index) => (
         <Link to={item.link} key={`${item}_${index}`}>
-          <ListItemButton
-          >
+          <ListItemButton>
             <ListItemIcon>
               {item.icon}
             </ListItemIcon>
@@ -82,9 +70,7 @@ const Navbar = () => {
         <List component="div" disablePadding>
           {chatNames.map((item, index) => (
             <Link to={`/chats/${item.id + 1}`} key={`${item}_${index}`}>
-              <ListItemButton
-                sx={{ pl: 4 }}
-              >
+              <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <Chat/>
                 </ListItemIcon>

@@ -1,9 +1,19 @@
 import React from 'react';
-import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Copyright } from "../components";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  createTheme,
+  CssBaseline,
+  Grid,
+  TextField,
+  ThemeProvider,
+  Typography
+} from '@mui/material';
+import { LockOutlined } from '@mui/icons-material';
 import { Link } from "react-router-dom";
+import { Copyright } from "../components";
 
 const theme = createTheme();
 
@@ -21,16 +31,9 @@ const SignIn = () => {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={{ mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon/>
+            <LockOutlined/>
           </Avatar>
           <Typography component="h1" variant="h5">
             Вход в Group Town
@@ -56,12 +59,7 @@ const SignIn = () => {
               id="password"
               autoComplete="current-password"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Войти
             </Button>
             <Grid container justifyContent="center">

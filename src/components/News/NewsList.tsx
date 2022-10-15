@@ -2,7 +2,7 @@ import React from 'react';
 import NewsItem from "./NewsItem";
 import './News.scss';
 import { useSelector } from "react-redux";
-import { selectNews } from "../../../redux/news/selectors";
+import { selectNews } from "../../redux/news/selectors";
 
 const NewsList = () => {
   const { news } = useSelector(selectNews);

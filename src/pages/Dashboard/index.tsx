@@ -1,21 +1,10 @@
 import React, { SyntheticEvent } from 'react';
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Tab } from '@mui/material';
 import News from "./News";
 import TodoBlock from "./TodoBlock";
 import Schedule from "./Schedule";
 import Progress from "./Progress";
-import { Link } from "react-router-dom";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-
-function LinkTab(props: any) {
-  return (
-    <Tab
-      component={Link}
-      to={props.pathname}
-      {...props}
-    />
-  );
-}
 
 const Dashboard = () => {
   const [value, setValue] = React.useState('1');
@@ -27,7 +16,7 @@ const Dashboard = () => {
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box>
-          <TabList onChange={handleChange} sx={{ marginRight: 20 }}>
+          <TabList onChange={handleChange} sx={{ mr: 20 }}>
             <Tab label="Новости" value="1" sx={customStyles}/>
             <Tab label="Список дел" value="2" sx={customStyles}/>
             <Tab label="Что-то там еще..." value="3" sx={customStyles}/>
@@ -39,7 +28,7 @@ const Dashboard = () => {
         <TabPanel value="2"><TodoBlock/></TabPanel>
         <TabPanel value="3">Item 3</TabPanel>
         <TabPanel value="4"><Progress/></TabPanel>
-        <TabPanel value="5" sx={{ padding: '24px 0' }}><Schedule/></TabPanel>
+        <TabPanel value="5" sx={{ p: '24px 0' }}><Schedule/></TabPanel>
       </TabContext>
     </Box>
   );
