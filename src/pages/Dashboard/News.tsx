@@ -1,6 +1,6 @@
 import React from 'react';
-import { AddNews, NewsList } from '../../../components';
-import '../../../components/News/News.scss';
+import { AddNews, NewsList } from '../../components';
+import '../../components/News/News.scss';
 
 const News = () => {
   return (

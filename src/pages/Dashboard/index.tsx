@@ -2,18 +2,18 @@ import React, { SyntheticEvent } from 'react';
 import { Box, Tab } from '@mui/material';
 import News from "./News";
 import TodoBlock from "./TodoBlock";
-import Schedule from "./Schedule";
 import Progress from "./Progress";
+import Schedule from "./Schedule";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 const Dashboard = () => {
   const [value, setValue] = React.useState('1');
   const customStyles = { textTransform: 'initial', fontSize: '1.5rem' };
 
-  const handleChange = (event: SyntheticEvent, newValue: string) => setValue(newValue);
+  const handleChange = (e: SyntheticEvent, newValue: string) => setValue(newValue);
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1' }}>
+    <Box sx={{ width: '100%' }}>
       <TabContext value={value}>
         <Box>
           <TabList onChange={handleChange} sx={{ mr: 20 }}>

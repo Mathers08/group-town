@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectNews } from "../../../redux/news/selectors";
+import { selectNews } from "../../redux/news/selectors";
 import { ArrowBack } from '@mui/icons-material';
 import { IconButton } from "@mui/material";
 

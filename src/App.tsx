@@ -4,7 +4,7 @@ import { Header, Navbar } from "./components";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Dashboard, GroupList, Home, Profile, SignIn, SignUp } from "./pages";
-import FullNews from "./pages/Dashboard/News/FullNews";
+import FullNews from "./pages/Dashboard/FullNews";
 
 // a.split(' ').slice(0, 2).map(e => e[0]).join('');
 const theme = createTheme({

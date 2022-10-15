@@ -1,5 +1,5 @@
 import React from "react";
-import './TableTop.scss';
+import './Schedule.scss';
 
 const TableTop = () => {
   const days = [

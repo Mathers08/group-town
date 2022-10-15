@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import './Couple.scss';
-import { useColor, useModal } from "../../../../hooks";
-import Modal from "../Modal";
+import './Schedule.scss';
+import Modal from "./Modal";
+import { useColor, useModal } from "../../hooks";
 
 const Couple = () => {
   const { color, setColor } = useColor();

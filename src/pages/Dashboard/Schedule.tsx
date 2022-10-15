@@ -1,7 +1,6 @@
 import React from 'react';
-import './Schedule.scss';
-import TableTop from "./TableTop";
-import Couple from "./Couple";
+import { Couple, TableTop } from '../../components';
+import '../../components/Schedule/Schedule.scss';
 
 const Schedule = () => {
   const times = [

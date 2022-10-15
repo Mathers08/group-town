@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { createPortal } from 'react-dom';
 import './Modal.scss';
-import { useColor } from '../../../../hooks';
+import { useColor } from '../../../hooks';
 
 interface ModalProps {
   isModalActive: boolean,
