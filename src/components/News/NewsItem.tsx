@@ -17,7 +17,7 @@ const NewsItem = ({ id, title, content, importance }: INews) => {
       <span className="item__importance" style={{ background: `linear-gradient(${importance}, #d3d3d3)` }}/>
       <div className="item__title">
         <h2>{title}</h2>
-        <IconButton><Close onClick={() => onDeleteClick(id)}/></IconButton>
+        <IconButton onClick={() => onDeleteClick(id)}><Close/></IconButton>
       </div>
       <p className="item__text">{content.length > 185 ? slicedContent + '...' : content}</p>
       {content.length > 185 &&

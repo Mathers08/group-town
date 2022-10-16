@@ -5,6 +5,7 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Dashboard, GroupList, Home, Profile, SignIn, SignUp } from "./pages";
 import FullNews from "./pages/Dashboard/FullNews";
+import NewsEditor from "./pages/Dashboard/NewsEditor";
 
 // a.split(' ').slice(0, 2).map(e => e[0]).join('');
 const theme = createTheme({
@@ -50,6 +51,7 @@ const App = () => {
                 <Route path="/group" element={<GroupList/>}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
                 <Route path="/news/:id" element={<FullNews/>}/>
+                <Route path="/editor" element={<NewsEditor/>}/>
               </Routes>
             </div>
           </div>

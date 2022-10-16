@@ -8,7 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { INews } from "../../redux/news/types";
 import { addNews } from "../../redux/news/slice";
 import { formatDate } from "../../utils";
-import { Button, Stack } from "@mui/material";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
@@ -71,19 +72,27 @@ const AddNews = () => {
       </div>
       <form onSubmit={handleSubmit} className="addNews__inputs">
         {isFocused && <div className="addNews__inputs-importance">
-          <h4>Выберите важность:</h4>
-          <div className="importance">
-            {importances.map(importance => (
-              <div key={importance.id}
-                   className="importance__item"
-                   onClick={() => onImportanceClick(importance.id, importance.color)}
-                   style={selectedId === importance.id ? { borderBottom: '2px solid whitesmoke' } : undefined}
-              >
-                <div className={`circle ${importance.color}-circle`}/>
-                <p>{importance.title}</p>
-              </div>
-            ))}
+          <div>
+            <h4>Выберите важность:</h4>
+            <div className="importance">
+              {importances.map(importance => (
+                <div key={importance.id}
+                     className="importance__item"
+                     onClick={() => onImportanceClick(importance.id, importance.color)}
+                     style={selectedId === importance.id ? { borderBottom: '2px solid whitesmoke' } : undefined}
+                >
+                  <div className={`circle ${importance.color}-circle`}/>
+                  <p>{importance.title}</p>
+                </div>
+              ))}
+            </div>
           </div>
+
+          <Link to="/editor">
+            <Button variant="outlined" color='inherit' sx={{ height: 45, color: '#fff', borderColor: '#fff' }}>
+              Расширенный функционал
+            </Button>
+          </Link>
         </div>}
         <input
           onClick={onHeaderClick}
@@ -100,14 +109,9 @@ const AddNews = () => {
             className="news-input addNews__inputs-content"
             placeholder="Подробная информация..."
           />
-          <Stack spacing={2} direction="row" justifyContent="center">
-            <Button type="submit" variant="contained" sx={{ width: 200 }}>
-              Добавить новость
-            </Button>
-            <Button variant="outlined" color="inherit" sx={{ width: 200 }}>
-              Редактировать
-            </Button>
-          </Stack>
+          <Button type="submit" color='inherit' variant="outlined" sx={{ width: 200, m: '0 auto' }}>
+            Добавить новость
+          </Button>
         </>
         }
       </form>

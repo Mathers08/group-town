@@ -19,7 +19,7 @@ const Dashboard = () => {
           <TabList onChange={handleChange} sx={{ mr: 20 }}>
             <Tab label="Новости" value="1" sx={customStyles}/>
             <Tab label="Список дел" value="2" sx={customStyles}/>
-            <Tab label="Что-то там еще..." value="3" sx={customStyles}/>
+            <Tab label="Успеваемость" value="3" sx={customStyles}/>
             <Tab label="Прогресс" value="4" sx={customStyles}/>
             <Tab label="Расписание" value="5" sx={customStyles}/>
           </TabList>

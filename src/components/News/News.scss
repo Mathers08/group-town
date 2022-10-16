@@ -52,7 +52,7 @@
 
 .addNews {
   background-color: $primary;
-  padding: 30px 50px;
+  padding: 30px 50px 40px;
   border-radius: 15px;
   color: whitesmoke;
 
@@ -87,6 +87,9 @@
     }
 
     &-importance {
+      display: flex;
+      justify-content: space-between;
+
       h4 {
         margin: 15px 0;
       }
@@ -186,13 +189,73 @@
     margin-top: 30px;
 
     &-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
       p {
         font-family: monospace;
       }
     }
 
     &-content {
-
+      margin-top: 15px;
     }
+    &-details {
+      display: flex;
+      gap: 20px;
+      opacity: .6;
+      font-size: 18px;
+      margin-top: 20px;
+      li {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+  }
+}
+
+.title {
+  input {
+    font-size: 42px;
+    font-weight: 900;
+  }
+
+  div {
+    &:before,
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.image {
+  width: 100%;
+}
+
+.tags {
+  margin: 15px 0;
+}
+
+.editor {
+  margin: 30px -30px;
+
+  :global {
+    .cm-s-easymde {
+      border: 0;
+      font-size: 22px;
+    }
+    .editor-toolbar {
+      border: 0;
+      background-color: rgb(0 0 0 / 2%);
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+
+  button {
+    margin-right: 15px;
   }
 }
