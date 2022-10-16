@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { ChangeEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./AddTodo.scss";
+import "./Todos.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import { useAppDispatch } from "../../../../hooks";
-import { addTodo } from "../../../../redux/todos/slice";
-import { ITodo } from "../../../../redux/todos/types";
+import { useAppDispatch } from "../../hooks";
+import { addTodo } from "../../redux/todos/slice";
+import { ITodo } from "../../redux/todos/types";
 import { v4 as uuidv4 } from 'uuid';
 
 const AddTask = () => {
@@ -35,31 +35,31 @@ const AddTask = () => {
   };
 
   return (
-    <div className="add-task">
+    <div className="addTodo">
       <ToastContainer/>
-      <div className="add-task__title">
+      <div className="addTodo__title">
         <TextSnippetIcon sx={{ wight: '25px' }}/>
-        <h2 className="add-task__title__text">Создание новой задачи</h2>
+        <h2 className="addTodo__title-text">Создание новой задачи</h2>
       </div>
-      <form onSubmit={handleSubmit} className="add-task__inputs">
+      <form onSubmit={handleSubmit} className="addTodo__inputs">
         <div>
-          <p className="add-task__lether-count">{title.length} / 50</p>
+          <p className="addTodo__inputs-count">{title.length} / 50</p>
           <input
             maxLength={50}
             value={title}
             onChange={onTitleChange}
-            className="input add-task__inputs__name"
+            className="input addTodo__inputs-name"
             type="text"
             placeholder="Заголовок задачи"
           />
         </div>
         <div>
-          <p className="add-task__lether-count">{content.length} / 100</p>
+          <p className="addTodo__inputs-count">{content.length} / 100</p>
           <textarea
             maxLength={75}
             value={content}
             onChange={onContentChange}
-            className="input add-task__inputs__content"
+            className="input addTodo__inputs-content"
             placeholder="Подробная информация..."
           />
         </div>
@@ -67,7 +67,7 @@ const AddTask = () => {
         <motion.button
           type="submit"
           whileTap={{ scale: 0.9 }}
-          className="add-task__inputs__submit"
+          className="addTodo__inputs-submit"
         >
           Создать новую задачу
         </motion.button>

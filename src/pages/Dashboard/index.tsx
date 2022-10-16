@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 import { Box, Tab } from '@mui/material';
 import News from "./News";
-import TodoBlock from "./TodoBlock";
+import Todos from "./Todos";
 import Progress from "./Progress";
 import Schedule from "./Schedule";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
@@ -25,7 +25,7 @@ const Dashboard = () => {
           </TabList>
         </Box>
         <TabPanel value="1"><News/></TabPanel>
-        <TabPanel value="2"><TodoBlock/></TabPanel>
+        <TabPanel value="2"><Todos/></TabPanel>
         <TabPanel value="3">Item 3</TabPanel>
         <TabPanel value="4"><Progress/></TabPanel>
         <TabPanel value="5" sx={{ p: '24px 0' }}><Schedule/></TabPanel>

@@ -1,0 +1,340 @@
+@import "../../App";
+
+.addTodo {
+  background-color: $primary;
+  padding: 30px 50px;
+  border-radius: 15px;
+  color: whitesmoke;
+
+  &__title {
+    display: flex;
+    place-items: center;
+    gap: 10px;
+
+    &-text {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+    }
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-count {
+      text-align: right;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    &-content {
+      resize: none;
+      height: 120px;
+    }
+
+    &-submit {
+      margin-top: 10px;
+      width: 250px;
+      font-size: 18px;
+      margin-inline: auto;
+      padding: 8px;
+      color: white;
+      border: 2px solid white;
+      background-color: transparent;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+  }
+
+}
+
+.dropDown {
+  position: relative;
+  width: fit-content;
+  z-index: 100;
+  transform: scale(1);
+
+  &__change {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    align-items: center;
+    height: 40px;
+    width: 150px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgb(0 0 0 / 14%);
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  &__item {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.050);
+    }
+  }
+
+  .item-container {
+    flex-direction: column;
+    gap: 5px;
+    top: 40px;
+    border-radius: 5px;
+    z-index: 999;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.137);
+    position: absolute;
+    width: 100%;
+    display: none;
+  }
+
+  & .show {
+    display: flex;
+  }
+
+}
+
+.todoItem {
+  position: relative;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.158);
+  padding: 20px 20px 20px 40px;
+  border-radius: 8px;
+
+  .line {
+    content: '';
+    width: 5px;
+    height: 80%;
+    position: absolute;
+    left: 12px;
+    border-radius: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 200ms ease;
+  }
+
+  &__title {
+    word-wrap: break-word;
+    font-size: 24px;
+    margin: 15px 0;
+  }
+
+  &__content {
+    margin-top: 25px;
+    white-space: pre-line;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  &__status {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+
+  &__close {
+    background-color: #FF4545;
+  }
+
+  &__edit {
+    background-color: #F0DC2A;
+  }
+
+  &__done {
+    background-color: #69FF34;
+  }
+
+  & del {
+    color: rgba(0, 0, 0, 0.486);
+  }
+
+  .done-true {
+    background-color: #69FF34;
+  }
+
+  .done-false {
+    background-color: #FF4545;
+  }
+
+  .ball {
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.todoList {
+  padding: 30px 50px;
+
+  &__title {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+    place-items: center;
+
+    &-text {
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+
+  &__sort {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    .clear-all {
+      height: 40px;
+      width: 150px;
+      font-size: 18px;
+      background-color: white;
+      border-radius: 5px;
+      border: none;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.151);
+      cursor: pointer;
+    }
+  }
+
+  .tasks__container {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      width: 5px;
+      background-color: rgb(223, 223, 223);
+      border-radius: 50px;
+    }
+
+    .nothing {
+      font-weight: 600;
+      font-size: 22px;
+      margin-top: 20px;
+    }
+  }
+}
+
+.popUp {
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 5px;
+  padding: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.137);
+  background-color: white;
+  width: 400px;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: all 200ms ease;
+
+  &__title {
+    font-size: 22px;
+    margin: 0;
+  }
+
+  &__input {
+    margin-top: 25px;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.233);
+    width: 100%;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__content {
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 100%;
+    padding: 8px;
+    height: 100px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.233);
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: row-reverse;
+
+    &-item {
+      color: white;
+      width: 120px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      height: 40px;
+      transition: all 200ms ease;
+    }
+
+    .ok {
+      background-color: #59b637;
+
+      &:hover {
+        background-color: #5aad3c;
+      }
+    }
+
+    .no {
+      background-color: #ff4545;
+
+      &:hover {
+        background-color: #dd3d3d;
+      }
+    }
+  }
+}

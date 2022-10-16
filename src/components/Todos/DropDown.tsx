@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { motion } from 'framer-motion';
-import './DropDown.scss';
+import "./Todos.scss";
 
 interface DropDownProps {
   changeCategory: (e: any) => void;
@@ -17,15 +17,15 @@ const DropDown: FC<DropDownProps> = ({ changeCategory, all }) => {
   };
 
   return (
-    <motion.div whileTap={{ scale: .9 }} className="drop-down">
-      <button onClick={handleOpen} className="drop-down__change">
+    <motion.div whileTap={{ scale: .9 }} className="dropDown">
+      <button onClick={handleOpen} className="dropDown__change">
         {all ? 'Все' : 'Сделанные'} <span>▼</span>
       </button>
       <div className={`item-container ${isOpen && 'show'}`}>
-        <div onClick={(e) => handleChange(e)} data-catagory="all" className="drop-down__item">
+        <div onClick={(e) => handleChange(e)} data-catagory="all" className="dropDown__item">
           Все
         </div>
-        <div onClick={(e) => handleChange(e)} data-catagory="done" className="drop-down__item">
+        <div onClick={(e) => handleChange(e)} data-catagory="done" className="dropDown__item">
           Сделанные
         </div>
       </div>

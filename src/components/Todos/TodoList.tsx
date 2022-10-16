@@ -1,12 +1,12 @@
 import { ChangeEvent, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import './TodoList.scss';
-import { useAppDispatch } from "../../../../hooks";
+import "./Todos.scss";
+import { useAppDispatch } from "../../hooks";
 import { useSelector } from "react-redux";
-import { selectTodos } from "../../../../redux/todos/selectors";
-import TodoItem from "../TodoItem";
-import { clearAll } from "../../../../redux/todos/slice";
-import DropDown from "../DropDown";
+import { selectTodos } from "../../redux/todos/selectors";
+import TodoItem from "./TodoItem";
+import { clearAll } from "../../redux/todos/slice";
+import DropDown from "./DropDown";
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 
 const TodoList = () => {
@@ -25,18 +25,18 @@ const TodoList = () => {
   const onClearClick = () => dispatch(clearAll());
 
   return (
-    <div className="tasks">
-      <div className="tasks__title">
+    <div className="todoList">
+      <div className="todoList__title">
         <StickyNote2Icon/>
-        <h2 className="tasks__title__text">Все задачи</h2>
+        <h2 className="todoList__title-text">Все задачи</h2>
       </div>
-      <div className="tasks__sort">
+      <div className="todoList__sort">
         <DropDown changeCategory={handleChange} all={all}/>
         <motion.button onClick={onClearClick} whileTap={{ scale: .9 }} className="clear-all">
           Удалить все
         </motion.button>
       </div>
-      <div className="tasks__container">
+      <div className="todoList__container">
         <AnimatePresence>
           {todos.length ? (
             all

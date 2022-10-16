@@ -3,7 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Avatar, Stack } from '@m
 import { ExpandMore, Person } from '@mui/icons-material';
 import '../components/News/News.scss';
 import NewsList from "../components/News/NewsList";
-import TodoList from "./Dashboard/TodoBlock/TodoList";
+import TodoList from "../components/Todos/TodoList";
 
 const Profile = () => {
   return (
