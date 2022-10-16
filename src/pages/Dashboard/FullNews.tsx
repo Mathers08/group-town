@@ -24,7 +24,10 @@ const FullNews = () => {
             <div className="full__top-line" style={{ background: item.importance }}/>
           </div>
           <div className="full__main">
-            <p className="full__main-info">Дата создания: {item.createdAt}</p>
+            <div className="full__main-info">
+              <p>Автор: Black Mathers</p>
+              <p>Дата создания: {item.createdAt}</p>
+            </div>
             <h2 className="full__main-content">{item.content}</h2>
           </div>
         </>

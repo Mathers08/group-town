@@ -27,7 +27,7 @@ const theme = createTheme({
   }
 });
 
-const isAuth = true;
+const isAuth = false;
 
 const App = () => {
   const location = useLocation();

@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FC, useState } from 'react';
-import { Close } from "@mui/icons-material";
-import { Button, IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 import { CoupleColorEnum, ICouple } from "../../redux/schedule/types";
 import { useAppDispatch } from "../../hooks";
 import Modal from "../Modal";
@@ -58,10 +57,7 @@ const Couple: FC<CoupleProps> = ({ id, subject, audience, lecturer, coupleColor 
         {!isTyping ? <Info/> : <br/>}
         {isModalActive &&
           <Modal active={isModalActive} setActive={setIsModalActive} color={editColor}>
-            <div className="coupleModal">
-              <div className="coupleModal__top">
-                <IconButton><Close onClick={onModalClick}/></IconButton>
-              </div>
+            <div>
               <form onSubmit={handleSubmit}>
                 <h3 style={{ color: textColor }}>Предмет</h3>
                 <input
@@ -88,11 +84,13 @@ const Couple: FC<CoupleProps> = ({ id, subject, audience, lecturer, coupleColor 
                 <div>
                   <h3 style={{ color: textColor }}>Выберите цвет</h3>
                   <div className="colors">
-                    <div className="circle color colors-blue"
+                    <div className="circle colors-default"
+                         onClick={() => setEditColor(CoupleColorEnum.DEFAULT)}/>
+                    <div className="circle colors-blue"
                          onClick={() => setEditColor(CoupleColorEnum.BLUE)}/>
-                    <div className="circle color colors-green"
+                    <div className="circle colors-green"
                          onClick={() => setEditColor(CoupleColorEnum.GREEN)}/>
-                    <div className="circle color colors-red"
+                    <div className="circle colors-red"
                          onClick={() => setEditColor(CoupleColorEnum.RED)}/>
                   </div>
                 </div>

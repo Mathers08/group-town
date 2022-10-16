@@ -64,7 +64,7 @@ const Header: FC<HeaderProps> = ({ isAuth }) => {
             <img src={logo2} alt=""/>
             <h1 style={{ fontFamily: 'monospace', marginLeft: '-7px' }}>own</h1>
           </Link>
-          {isAuth
+          {!isAuth
             ?
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="">
@@ -96,11 +96,11 @@ const Header: FC<HeaderProps> = ({ isAuth }) => {
             </Box>
             :
             <Stack spacing={2} direction="row">
-              <Link to="/signup">
-                <Button variant="outlined">Зарегистрироваться</Button>
-              </Link>
               <Link to="/login">
-                <Button variant="contained">Войти</Button>
+                <Button variant="outlined">Войти</Button>
+              </Link>
+              <Link to="/signup">
+                <Button variant="contained">Создать аккаунт</Button>
               </Link>
             </Stack>
           }

@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./News.scss";
@@ -9,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { INews } from "../../redux/news/types";
 import { addNews } from "../../redux/news/slice";
 import { formatDate } from "../../utils";
+import { Button, Stack } from "@mui/material";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
@@ -29,11 +29,13 @@ const AddNews = () => {
       title: 'Очень важно'
     },
   ];
+  const [isFocused, setIsFocused] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
   const [importance, setImportance] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
+  const onHeaderClick = () => setIsFocused(true);
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
   const onContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value);
   const onImportanceClick = (id: number, color: string) => {
@@ -68,7 +70,7 @@ const AddNews = () => {
         <h2 className="addNews__title-text">Что нового?</h2>
       </div>
       <form onSubmit={handleSubmit} className="addNews__inputs">
-        <div className="addNews__inputs-importance">
+        {isFocused && <div className="addNews__inputs-importance">
           <h4>Выберите важность:</h4>
           <div className="importance">
             {importances.map(importance => (
@@ -82,24 +84,32 @@ const AddNews = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div>}
         <input
+          onClick={onHeaderClick}
           value={title}
           onChange={onTitleChange}
-          className="news-input addNews__inputs-title"
+          className="news-input"
           type="text"
           placeholder="Напишите заголовок"
         />
-        <textarea
-          value={content}
-          onChange={onContentChange}
-          className="news-input addNews__inputs-content"
-          placeholder="Подробная информация..."
-        />
-
-        <motion.button type="submit" whileTap={{ scale: 0.9 }} className="addNews__inputs-submit">
-          Добавить новость
-        </motion.button>
+        {isFocused && <>
+          <textarea
+            value={content}
+            onChange={onContentChange}
+            className="news-input addNews__inputs-content"
+            placeholder="Подробная информация..."
+          />
+          <Stack spacing={2} direction="row" justifyContent="center">
+            <Button type="submit" variant="contained" sx={{ width: 200 }}>
+              Добавить новость
+            </Button>
+            <Button variant="outlined" color="inherit" sx={{ width: 200 }}>
+              Редактировать
+            </Button>
+          </Stack>
+        </>
+        }
       </form>
     </div>
   );

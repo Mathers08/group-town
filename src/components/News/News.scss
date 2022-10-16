@@ -18,6 +18,7 @@
       position: relative;
       width: 47%;
       background-color: #d3d3d3;
+      box-shadow: 0 0 20px rgb(0 0 0 / 65%);
       padding: 32px;
       border-radius: 8px;
 
@@ -59,6 +60,7 @@
     display: flex;
     place-items: center;
     gap: 10px;
+    margin-bottom: 10px;
 
     &-text {
       margin: 0;
@@ -158,6 +160,7 @@
   padding: 30px 50px 45px;
   background-color: lightgrey;
   border-radius: 40px;
+  box-shadow: 0 0 20px rgb(0 0 0 / 65%);
 
   &__top {
     display: flex;
@@ -181,9 +184,11 @@
 
   &__main {
     margin-top: 30px;
-    &-info {
-      font-family: monospace;
 
+    &-info {
+      p {
+        font-family: monospace;
+      }
     }
 
     &-content {
