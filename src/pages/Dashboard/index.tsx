@@ -5,6 +5,7 @@ import Todos from "./Todos";
 import Progress from "./Progress";
 import Schedule from "./Schedule";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import Performance from "./Performance";
 
 const Dashboard = () => {
   const [value, setValue] = React.useState('1');
@@ -26,7 +27,7 @@ const Dashboard = () => {
         </Box>
         <TabPanel value="1"><News/></TabPanel>
         <TabPanel value="2"><Todos/></TabPanel>
-        <TabPanel value="3">Item 3</TabPanel>
+        <TabPanel value="3"><Performance/></TabPanel>
         <TabPanel value="4"><Progress/></TabPanel>
         <TabPanel value="5" sx={{ p: '24px 0' }}><Schedule/></TabPanel>
       </TabContext>

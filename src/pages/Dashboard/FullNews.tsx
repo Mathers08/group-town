@@ -30,7 +30,7 @@ const FullNews = () => {
                 <Person sx={{ width: 25, height: 25 }}/>
               </Avatar>
               <div>
-                <p><em>Автор:</em> Black Mathers</p>
+                <p><em>Автор:</em> Иванов Сергей</p>
                 <p><em>Дата создания:</em> {item.createdAt}</p>
               </div>
             </div>
