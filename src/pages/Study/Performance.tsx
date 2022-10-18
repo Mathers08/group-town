@@ -125,6 +125,7 @@ const Performance = () => {
 
   return (
     <div>
+      <h1 className='page__header'>Успеваемость</h1>
       {users.map(user => (
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMore/>}>

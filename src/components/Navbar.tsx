@@ -36,17 +36,17 @@ const Navbar = () => {
       title: 'Объявления',
       children: [
         {
-          link: '/news',
+          link: 'announcement/news',
           icon: <Newspaper/>,
           title: 'Новости',
         },
         {
-          link: '/articles',
+          link: 'announcement/articles',
           icon: <ReceiptLong/>,
           title: 'Статьи',
         },
         {
-          link: '/todos',
+          link: 'announcement/todos',
           icon: <ListAlt/>,
           title: 'Список дел',
         }
@@ -58,17 +58,17 @@ const Navbar = () => {
       title: 'Учеба',
       children: [
         {
-          link: '/performance',
+          link: 'study/performance',
           icon: <CreditScore/>,
           title: 'Успеваемость',
         },
         {
-          link: '/progress',
+          link: 'study/progress',
           icon: <PublishedWithChanges/>,
           title: 'Прогресс',
         },
         {
-          link: '/schedule',
+          link: 'study/schedule',
           icon: <CalendarMonth/>,
           title: 'Расписание',
         }
@@ -80,7 +80,7 @@ const Navbar = () => {
   const onIsOpenClick = () => setIsOpen(!isOpen);
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, mr: '50px' }}>
+    <List sx={{ width: '100%', maxWidth: 340 }}>
       {primaryItems.map((item) => (
         <Link to={item.link} key={item.link}>
           <ListItemButton>

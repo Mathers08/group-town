@@ -3,9 +3,20 @@ import './App.scss';
 import { Header, Navbar } from "./components";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { Dashboard, GroupList, Home, Profile, SignIn, SignUp } from "./pages";
-import FullNews from "./pages/Dashboard/FullNews";
-import NewsEditor from "./pages/Dashboard/NewsEditor";
+import {
+  FullNews,
+  GroupList,
+  Home,
+  News,
+  ArticleEditor,
+  Performance,
+  Profile,
+  Progress,
+  Schedule,
+  SignIn,
+  SignUp,
+  Todos, Articles
+} from "./pages";
 
 // a.split(' ').slice(0, 2).map(e => e[0]).join('');
 const theme = createTheme({
@@ -49,9 +60,14 @@ const App = () => {
               <Routes>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/group" element={<GroupList/>}/>
-                <Route path="/dashboard" element={<Dashboard/>}/>
-                <Route path="/news/:id" element={<FullNews/>}/>
-                <Route path="/editor" element={<NewsEditor/>}/>
+                <Route path="/announcement/news" element={<News/>}/>
+                <Route path="/announcement/news/:id" element={<FullNews/>}/>
+                <Route path="/announcement/articles" element={<Articles/>}/>
+                <Route path="/announcement/articles/editor" element={<ArticleEditor/>}/>
+                <Route path="/announcement/todos" element={<Todos/>}/>
+                <Route path="/study/performance" element={<Performance/>}/>
+                <Route path="/study/progress" element={<Progress/>}/>
+                <Route path="/study/schedule" element={<Schedule/>}/>
               </Routes>
             </div>
           </div>

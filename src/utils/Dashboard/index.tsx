@@ -1,11 +1,11 @@
 import React, { SyntheticEvent } from 'react';
 import { Box, Tab } from '@mui/material';
-import News from "./News";
-import Todos from "./Todos";
-import Progress from "./Progress";
-import Schedule from "./Schedule";
+import News from "../../pages/Announcement/News";
+import Todos from "../../pages/Announcement/Todos";
+import Progress from "../../pages/Study/Progress";
+import Schedule from "../../pages/Study/Schedule";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import Performance from "./Performance";
+import Performance from "../../pages/Study/Performance";
 
 const Dashboard = () => {
   const [value, setValue] = React.useState('1');

@@ -18,6 +18,7 @@ const Schedule = () => {
 
   return (
     <div>
+      <h1 className='page__header'>Расписание</h1>
       <TableTop/>
       <div className='main'>
         <div className="main__time">

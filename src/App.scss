@@ -45,9 +45,17 @@ html {
   display: flex;
 
   &__content {
-    margin-top: 15px;
+    flex: 0 1 75%;
+    margin: 15px 0 0 50px;
     padding: 0 60px;
   }
+}
+
+.page__header {
+  font-size: 50px;
+  margin: 0 0 20px 20px;
+  width: 400px;
+  border-bottom: 5px solid $primary;
 }
 
 h1, h2, h3, h4, h5, h6, p, ul, li {

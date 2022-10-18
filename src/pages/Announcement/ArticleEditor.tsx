@@ -7,7 +7,7 @@ import 'easymde/dist/easymde.min.css';
 import '../../components/News/News.scss';
 import { Options } from "easymde";
 
-const NewsEditor = () => {
+const ArticleEditor = () => {
   const imageUrl = '';
   const [value, setValue] = React.useState('');
 
@@ -64,7 +64,7 @@ const NewsEditor = () => {
         <Button size="large" variant="contained">
           Опубликовать
         </Button>
-        <a href="/">
+        <a href="/src/pages">
           <Button size="large">Отмена</Button>
         </a>
       </div>
@@ -72,4 +72,4 @@ const NewsEditor = () => {
   );
 };
 
-export default NewsEditor;
+export default ArticleEditor;

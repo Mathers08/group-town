@@ -1,6 +1,13 @@
 export { default as Home } from './Home';
 export { default as Profile } from './Profile';
 export { default as GroupList } from './GroupList';
-export { default as Dashboard } from './Dashboard';
 export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';
+export { default as News } from './Announcement/News';
+export { default as FullNews } from './Announcement/FullNews';
+export { default as Articles } from './Announcement/Articles';
+export { default as ArticleEditor } from './Announcement/ArticleEditor';
+export { default as Todos } from './Announcement/Todos';
+export { default as Performance } from './Study/Performance';
+export { default as Progress } from './Study/Progress';
+export { default as Schedule } from './Study/Schedule';
