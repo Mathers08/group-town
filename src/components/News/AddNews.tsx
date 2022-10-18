@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+//import "react-toastify/dist/ReactToastify.css";
 import "./News.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";
@@ -58,6 +58,7 @@ const AddNews = () => {
       setSelectedId(-1);
       setTitle('');
       setContent('');
+      setImportance('');
     } else {
       toast.error("Пожалуйста, заполните все поля!");
     }

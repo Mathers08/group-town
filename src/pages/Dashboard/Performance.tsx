@@ -1,5 +1,4 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
 import {
   Accordion,
   AccordionDetails,
@@ -18,78 +17,111 @@ import {
 } from '@mui/material';
 import { ExpandMore, Person } from '@mui/icons-material';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#d5d5d5',
-  borderRadius: 0,
-  paddingLeft: theme.spacing(2),
-}));
+enum ExamDisciplineEnum {
+  EXAM = 'EXAM',
+  TEST = 'TEST',
+  DIFF = 'DIFF'
+}
+interface IDiscipline {
+  name: string,
+  lecturer: string,
+  date?: string,
+  mark?: number,
+  type: ExamDisciplineEnum
+}
 
 const Performance = () => {
-  enum SessionTypes {
-    EXAM = 'EXAM',
-    TEST = 'TEST',
-    DiFF = 'DIFF'
-  }
-
   const users = ['Иванов Сергей', 'Петров Алексей', 'Сидоров Олег'];
-  const session = [
+  const disciplines = [
     {
       name: 'Базы данных',
       lecturer: '',
       date: undefined,
       mark: undefined,
-      type: SessionTypes.EXAM
+      type: ExamDisciplineEnum.EXAM
     },
     {
       name: 'Численные методы',
       lecturer: '',
       date: undefined,
       mark: undefined,
-      type: SessionTypes.EXAM
+      type: ExamDisciplineEnum.EXAM
     },
     {
       name: 'Методы оптимизации',
       lecturer: '',
       date: undefined,
       mark: undefined,
-      type: SessionTypes.EXAM
+      type: ExamDisciplineEnum.EXAM
     },
     {
       name: 'Компьютерные сети',
       lecturer: '',
       date: undefined,
       mark: undefined,
-      type: SessionTypes.TEST
+      type: ExamDisciplineEnum.TEST
     },
     {
       name: 'Численные методы',
       lecturer: '',
       date: undefined,
       mark: undefined,
-      type: SessionTypes.TEST
+      type: ExamDisciplineEnum.TEST
     },
     {
       name: 'Машинное обучение',
       lecturer: '',
       date: undefined,
       mark: undefined,
-      type: SessionTypes.TEST
+      type: ExamDisciplineEnum.TEST
     },
     {
       name: 'Операционные системы',
       lecturer: '',
       date: undefined,
       mark: undefined,
-      type: SessionTypes.TEST
+      type: ExamDisciplineEnum.TEST
     },
     {
       name: 'Компьютерная графика',
       lecturer: '',
       date: undefined,
       mark: undefined,
-      type: SessionTypes.DiFF
+      type: ExamDisciplineEnum.DIFF
     },
   ];
+  const disciplineToName = (type: ExamDisciplineEnum) => {
+    switch (type) {
+      case ExamDisciplineEnum.EXAM:
+        return 'Теоретический курс';
+      case ExamDisciplineEnum.TEST:
+        return 'Практические занятия';
+      case ExamDisciplineEnum.DIFF:
+        return 'Дифференцированные зачеты';
+    }
+  };
+
+  const TableBodyDisplay = (disciplines: IDiscipline[], type: ExamDisciplineEnum) => {
+    return (
+      <Grid item xs={12}>
+        <TableContainer component={Paper} sx={{ mt: '-23px' }}>
+          <Table sx={{ minWidth: 650 }}>
+            <TableBody>
+              <Paper sx={{ bgcolor: '#d5d5d5', pl: '16px', width: 500 }}>{disciplineToName(type)}</Paper>
+              {disciplines.map(d => d.type === type && (
+                <TableRow key={d.name}>
+                  <TableCell component="th" scope="row">{d.name}</TableCell>
+                  <TableCell align="right">{d.lecturer}</TableCell>
+                  <TableCell align="right">{d.date}</TableCell>
+                  <TableCell align="right">{d.mark}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+    );
+  };
 
   return (
     <div>
@@ -117,54 +149,12 @@ const Performance = () => {
                           <TableCell sx={{ p: '10px' }} align="right">Оценка</TableCell>
                         </TableRow>
                       </TableHead>
-                      <TableBody>
-                        <Item>Теоретический курс</Item>
-                        {session.map(s => s.type === 'EXAM' && (
-                          <TableRow key={s.name}>
-                            <TableCell component="th" scope="row">{s.name}</TableCell>
-                            <TableCell align="right">{s.lecturer}</TableCell>
-                            <TableCell align="right">{s.date}</TableCell>
-                            <TableCell align="right">{s.mark}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
                     </Table>
                   </TableContainer>
                 </Grid>
-                <Grid item xs={12}>
-                  <TableContainer component={Paper} sx={{ mt: '-23px' }}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                      <TableBody>
-                        <Item>Практические знания</Item>
-                        {session.map(s => s.type === 'TEST' && (
-                          <TableRow key={s.name}>
-                            <TableCell component="th" scope="row">{s.name}</TableCell>
-                            <TableCell align="right">{s.lecturer}</TableCell>
-                            <TableCell align="right">{s.date}</TableCell>
-                            <TableCell align="right">{s.mark}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
-                <Grid item xs={12}>
-                  <TableContainer component={Paper} sx={{ mt: '-23px' }}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                      <TableBody>
-                        <Item>Дифференцированные зачеты</Item>
-                        {session.map(s => s.type === 'DIFF' && (
-                          <TableRow key={s.name}>
-                            <TableCell component="th" scope="row">{s.name}</TableCell>
-                            <TableCell align="right">{s.lecturer}</TableCell>
-                            <TableCell align="right">{s.date}</TableCell>
-                            <TableCell align="right">{s.mark}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
+                {TableBodyDisplay(disciplines, ExamDisciplineEnum.EXAM)}
+                {TableBodyDisplay(disciplines, ExamDisciplineEnum.TEST)}
+                {TableBodyDisplay(disciplines, ExamDisciplineEnum.DIFF)}
               </Grid>
             </Box>
           </AccordionDetails>

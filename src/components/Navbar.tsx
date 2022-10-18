@@ -1,54 +1,88 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState } from 'react';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { AccountCircle, Chat, ExpandLess, ExpandMore, Forum, Group, LineStyle } from '@mui/icons-material';
+import {
+  AccountCircle,
+  CalendarMonth,
+  CreditScore,
+  ExpandLess,
+  ExpandMore,
+  Group,
+  LineStyle,
+  ListAlt,
+  Newspaper,
+  PublishedWithChanges,
+  ReceiptLong,
+  School
+} from '@mui/icons-material';
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const navItems = [
+  const primaryItems = [
     {
-      id: 0,
       title: 'Профиль',
       icon: <AccountCircle/>,
       link: '/profile'
     },
     {
-      id: 1,
       title: 'Список группы',
       icon: <Group/>,
       link: '/group'
-    },
-    {
-      id: 2,
-      title: 'Доска',
-      icon: <LineStyle/>,
-      link: '/dashboard'
     }
   ];
-  const chatNames = [
+  const secondaryItems = [
     {
-      id: 0,
-      title: 'Чат 1',
+      key: 'Объявления',
+      icon: <LineStyle/>,
+      title: 'Объявления',
+      children: [
+        {
+          link: '/news',
+          icon: <Newspaper/>,
+          title: 'Новости',
+        },
+        {
+          link: '/articles',
+          icon: <ReceiptLong/>,
+          title: 'Статьи',
+        },
+        {
+          link: '/todos',
+          icon: <ListAlt/>,
+          title: 'Список дел',
+        }
+      ]
     },
     {
-      id: 1,
-      title: 'Чат 2',
-    },
-    {
-      id: 2,
-      title: 'Чат 3',
-    },
-    {
-      id: 3,
-      title: 'Чат 4',
-    },
+      key: 'Учеба',
+      icon: <School/>,
+      title: 'Учеба',
+      children: [
+        {
+          link: '/performance',
+          icon: <CreditScore/>,
+          title: 'Успеваемость',
+        },
+        {
+          link: '/progress',
+          icon: <PublishedWithChanges/>,
+          title: 'Прогресс',
+        },
+        {
+          link: '/schedule',
+          icon: <CalendarMonth/>,
+          title: 'Расписание',
+        }
+      ],
+    }
   ];
+
   const [isOpen, setIsOpen] = useState(true);
   const onIsOpenClick = () => setIsOpen(!isOpen);
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, marginRight: '50px' }}>
-      {navItems.map((item, index) => (
-        <Link to={item.link} key={`${item}_${index}`}>
+    <List sx={{ width: '100%', maxWidth: 360, mr: '50px' }}>
+      {primaryItems.map((item) => (
+        <Link to={item.link} key={item.link}>
           <ListItemButton>
             <ListItemIcon>
               {item.icon}
@@ -57,29 +91,28 @@ const Navbar = () => {
           </ListItemButton>
         </Link>
       ))}
+      {secondaryItems.map(({ key, title, icon, children }) => (
+        <div key={key}>
+          <ListItemButton onClick={onIsOpenClick}>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={title}/>
+            {isOpen ? <ExpandLess/> : <ExpandMore/>}
+          </ListItemButton>
 
-      <ListItemButton onClick={onIsOpenClick}>
-        <ListItemIcon>
-          <Forum/>
-        </ListItemIcon>
-        <ListItemText primary="Чаты"/>
-        {isOpen ? <ExpandLess/> : <ExpandMore/>}
-      </ListItemButton>
-
-      <Collapse in={isOpen} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {chatNames.map((item, index) => (
-            <Link to={`/chats/${item.id + 1}`} key={`${item}_${index}`}>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <Chat/>
-                </ListItemIcon>
-                <ListItemText primary={item.title}/>
-              </ListItemButton>
-            </Link>
-          ))}
-        </List>
-      </Collapse>
+          <Collapse in={isOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {children.map(({ title, link, icon }) => (
+                <Link to={link} key={link}>
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={title}/>
+                  </ListItemButton>
+                </Link>
+              ))}
+            </List>
+          </Collapse>
+        </div>
+      ))};
     </List>
   );
 };

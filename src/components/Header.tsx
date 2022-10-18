@@ -60,11 +60,11 @@ const Header: FC<HeaderProps> = ({ isAuth }) => {
         <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Link to="/dashboard" style={{ display: 'flex' }}>
             <img src={logo1} alt=""/>
-            <h1 style={{ fontFamily: 'monospace', letterSpacing: -1 }}>roup</h1>
+            <h1 style={{ letterSpacing: -1 }}>roup</h1>
             <img src={logo2} alt=""/>
-            <h1 style={{ fontFamily: 'monospace', marginLeft: '-7px' }}>own</h1>
+            <h1 style={{ marginLeft: '-7px' }}>own</h1>
           </Link>
-          {!isAuth
+          {isAuth
             ?
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="">
