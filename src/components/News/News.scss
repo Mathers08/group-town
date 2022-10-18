@@ -87,9 +87,6 @@
     }
 
     &-importance {
-      display: flex;
-      justify-content: space-between;
-
       h4 {
         margin: 15px 0;
       }
@@ -110,6 +107,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
+            box-shadow: inset -2px 4px rgb(0 0 0 / 25%);
           }
 
           .green-circle {

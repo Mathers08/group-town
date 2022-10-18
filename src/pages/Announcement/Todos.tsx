@@ -5,7 +5,7 @@ import AddTodo from "../../components/Todos/AddTodo";
 const Todos = () => {
   return (
     <div>
-      <h1 className='page__header'>Список дел</h1>
+      <h1 className='page__header'>{"\u00a0"}Список дел</h1>
       <AddTodo/>
       <TodoList/>
     </div>

@@ -76,8 +76,16 @@ const Navbar = () => {
     }
   ];
 
-  const [isOpen, setIsOpen] = useState(true);
-  const onIsOpenClick = () => setIsOpen(!isOpen);
+  const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(true);
+  const [isStudyOpen, setIsStudyOpen] = useState(true);
+  const onAnnouncementClick = () => {
+    console.log(isAnnouncementOpen);
+    setIsAnnouncementOpen(!isAnnouncementOpen);
+  }
+  const onStudyClick = () => {
+    console.log(isStudyOpen);
+    setIsStudyOpen(!isStudyOpen);
+  }
 
   return (
     <List sx={{ width: '100%', maxWidth: 340 }}>
@@ -93,13 +101,13 @@ const Navbar = () => {
       ))}
       {secondaryItems.map(({ key, title, icon, children }) => (
         <div key={key}>
-          <ListItemButton onClick={onIsOpenClick}>
+          <ListItemButton onClick={key === 'Объявления' ? onAnnouncementClick : onStudyClick}>
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={title}/>
-            {isOpen ? <ExpandLess/> : <ExpandMore/>}
+            {(key === 'Объявления' ? isAnnouncementOpen : isStudyOpen) ? <ExpandLess/> : <ExpandMore/>}
           </ListItemButton>
 
-          <Collapse in={isOpen} timeout="auto" unmountOnExit>
+          <Collapse in={key === 'Объявления' ? isAnnouncementOpen : isStudyOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               {children.map(({ title, link, icon }) => (
                 <Link to={link} key={link}>

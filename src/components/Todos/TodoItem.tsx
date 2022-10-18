@@ -1,11 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
-import { motion } from 'framer-motion';
 import "./Todos.scss";
 import { ITodo } from "../../redux/todos/types";
 import { useAppDispatch } from "../../hooks";
 import { deleteTodo, doneTodo, editTodo } from "../../redux/todos/slice";
 import { toast } from "react-toastify";
 import { Modal } from "../index";
+import { Clear, Done, ModeEdit } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 const TodoItem = ({ id, title, content, isComplete }: ITodo) => {
   const dispatch = useAppDispatch();
@@ -36,44 +37,12 @@ const TodoItem = ({ id, title, content, isComplete }: ITodo) => {
 
   return (
     <>
-      <motion.div
-        className="todoItem"
-        initial={{ x: '-100%', margin: 0 }}
-        animate={{ x: 0, marginTop: 25 }}
-        exit={{
-          x: '-100%',
-          height: 0,
-          marginTop: 0,
-          padding: 0,
-          opacity: 0,
-          width: 0,
-          transition: {
-            duration: 0.3,
-          },
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 80,
-          damping: 10,
-        }}
-      >
+      <div className='todoItem'>
         <span className={`line done-${isComplete}`}></span>
         <div className="todoItem__status">
-          <motion.button
-            whileTap={{ scale: 2 }}
-            onClick={() => onDeleteClick(id)}
-            className="ball todoItem__close"
-          />
-          <motion.button
-            whileTap={{ scale: 2 }}
-            onClick={onModalClick}
-            className="ball todoItem__edit"
-          />
-          <motion.button
-            whileTap={{ scale: 2 }}
-            onClick={() => onDoneClick(id)}
-            className="ball todoItem__done"
-          />
+          <IconButton onClick={() => onDoneClick(id)}><Done/></IconButton>
+          <IconButton onClick={onModalClick}><ModeEdit/></IconButton>
+          <IconButton onClick={() => onDeleteClick(id)}><Clear/></IconButton>
         </div>
         <h4 className="todoItem__title">
           {isComplete ? <del>{title}</del> : title}
@@ -82,7 +51,7 @@ const TodoItem = ({ id, title, content, isComplete }: ITodo) => {
           {isComplete ? <del>{content}</del> : content}
         </p>
 
-      </motion.div>
+      </div>
       <Modal active={isModalActive} setActive={setIsModalActive}>
         <div className={isModalActive ? "popUp popUp__show" : "popUp"}>
           <h4 className="pop-up__title">Редактирование записи</h4>
@@ -101,10 +70,10 @@ const TodoItem = ({ id, title, content, isComplete }: ITodo) => {
               className="popUp__content"
             />
             <div className="popUp__buttons">
-              <button type="submit" className="popUp__buttons-item ok">Сохранить</button>
               <button type="submit" className="popUp__buttons-item no" onClick={(e) => handleSubmit(e, false)}>
                 Отменить
               </button>
+              <button type="submit" className="popUp__buttons-item ok">Сохранить</button>
             </div>
           </form>
         </div>

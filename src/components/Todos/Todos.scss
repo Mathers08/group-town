@@ -123,6 +123,7 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.158);
   padding: 20px 20px 20px 40px;
   border-radius: 8px;
+  margin-bottom: 30px;
 
   .line {
     content: '';
@@ -308,7 +309,6 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    flex-direction: row-reverse;
 
     &-item {
       color: white;

@@ -14,7 +14,7 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
-import { AccountCircle, Group, LineStyle, Logout } from "@mui/icons-material";
+import { AccountCircle, Group, LineStyle, Logout, Newspaper } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { logo1, logo2 } from '../assets';
 
@@ -39,9 +39,9 @@ const Header: FC<HeaderProps> = ({ isAuth }) => {
     },
     {
       id: 2,
-      title: 'Доска',
-      icon: <LineStyle/>,
-      link: '/dashboard'
+      title: 'Новости',
+      icon: <Newspaper/>,
+      link: '/announcement/news'
     },
     {
       id: 3,

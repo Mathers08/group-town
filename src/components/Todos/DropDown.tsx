@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { motion } from 'framer-motion';
 import "./Todos.scss";
 
 interface DropDownProps {
@@ -17,7 +16,7 @@ const DropDown: FC<DropDownProps> = ({ changeCategory, all }) => {
   };
 
   return (
-    <motion.div whileTap={{ scale: .9 }} className="dropDown">
+    <div className="dropDown">
       <button onClick={handleOpen} className="dropDown__change">
         {all ? 'Все' : 'Сделанные'} <span>▼</span>
       </button>
@@ -29,7 +28,7 @@ const DropDown: FC<DropDownProps> = ({ changeCategory, all }) => {
           Сделанные
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

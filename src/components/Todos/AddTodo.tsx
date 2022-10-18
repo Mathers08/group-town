@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ChangeEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -64,13 +63,9 @@ const AddTask = () => {
           />
         </div>
 
-        <motion.button
-          type="submit"
-          whileTap={{ scale: 0.9 }}
-          className="addTodo__inputs-submit"
-        >
+        <button type="submit" className="addTodo__inputs-submit">
           Создать новую задачу
-        </motion.button>
+        </button>
       </form>
     </div>
   );
