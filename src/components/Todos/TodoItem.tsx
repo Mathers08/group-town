@@ -50,8 +50,8 @@ const TodoItem = ({ id, title, content, isComplete }: ITodo) => {
         <p className="todoItem__content">
           {isComplete ? <del>{content}</del> : content}
         </p>
-
       </div>
+      
       <Modal active={isModalActive} setActive={setIsModalActive}>
         <div className={isModalActive ? "popUp popUp__show" : "popUp"}>
           <h4 className="pop-up__title">Редактирование записи</h4>

@@ -21,7 +21,7 @@ const NewsItem = ({ id, title, content, importance }: INews) => {
       </div>
       <p className="item__text">{content.length > 185 ? slicedContent + '...' : content}</p>
       {content.length > 185 &&
-        <Link to={`/news/${id}`}>
+        <Link to={`/announcement/news/${id}`}>
           <Button variant="contained">Читать дальше</Button>
         </Link>
       }

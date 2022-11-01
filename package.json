@@ -24,7 +24,6 @@
     "@types/uuid": "^8.3.4",
     "dayjs": "^1.11.5",
     "easymde": "^2.18.0",
-    "framer-motion": "^7.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.37.0",
