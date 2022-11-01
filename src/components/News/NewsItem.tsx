@@ -7,7 +7,7 @@ import { useAppDispatch } from "../../hooks";
 import { deleteNews } from "../../redux/news/slice";
 import { Link } from "react-router-dom";
 
-const NewsItem = ({ id, title, content, importance }: INews) => {
+const NewsItem = ({ _id, title, content, importance }: INews) => {
   const dispatch = useAppDispatch();
   const slicedContent = content.slice(0, 180);
   const onDeleteClick = (id: string) => dispatch(deleteNews(id));
@@ -17,11 +17,11 @@ const NewsItem = ({ id, title, content, importance }: INews) => {
       <span className="item__importance" style={{ background: `linear-gradient(${importance}, #d3d3d3)` }}/>
       <div className="item__title">
         <h2>{title}</h2>
-        <IconButton onClick={() => onDeleteClick(id)}><Close/></IconButton>
+        <IconButton onClick={() => onDeleteClick(_id)}><Close/></IconButton>
       </div>
       <p className="item__text">{content.length > 185 ? slicedContent + '...' : content}</p>
       {content.length > 185 &&
-        <Link to={`/announcement/news/${id}`}>
+        <Link to={`/announcement/news/${_id}`}>
           <Button variant="contained">Читать дальше</Button>
         </Link>
       }

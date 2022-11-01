@@ -5,27 +5,27 @@ import "./News.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";
 import { v4 as uuidv4 } from 'uuid';
-import { INews } from "../../redux/news/types";
+import { INews, NewsImportanceEnum } from "../../redux/news/types";
 import { addNews } from "../../redux/news/slice";
 import { formatDate } from "../../utils";
 import { Button } from "@mui/material";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
-  const importances = [
+  const allImportance = [
     {
       id: 0,
-      color: 'green',
+      color: NewsImportanceEnum.EASY,
       title: 'Не очень важно'
     },
     {
       id: 1,
-      color: 'yellow',
+      color: NewsImportanceEnum.MEDIUM,
       title: 'Средняя важность'
     },
     {
       id: 2,
-      color: 'red',
+      color: NewsImportanceEnum.HARD,
       title: 'Очень важно'
     },
   ];
@@ -45,10 +45,12 @@ const AddNews = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const newItem: INews = {
-      id: uuidv4(),
+      _id: uuidv4(),
       title,
       content,
       importance,
+      viewsCount: 0,
+      user: {firstName: '', lastName: ''},
       createdAt: formatDate(new Date)
     };
     if (title.trim() !== "" && content.trim() !== "" && importance !== '') {
@@ -74,7 +76,7 @@ const AddNews = () => {
         {isFocused && <div className="addNews__inputs-importance">
           <h4>Выберите важность:</h4>
           <div className="importance">
-            {importances.map(importance => (
+            {allImportance.map(importance => (
               <div key={importance.id}
                    className="importance__item"
                    onClick={() => onImportanceClick(importance.id, importance.color)}

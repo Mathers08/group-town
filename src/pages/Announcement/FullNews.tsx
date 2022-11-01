@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectNews } from "../../redux/news/selectors";
 import { ArrowBack, ChatBubbleOutlineOutlined, Person, RemoveRedEyeOutlined } from '@mui/icons-material';
 import { Avatar, IconButton } from "@mui/material";
+import axios from "../../axios";
+import { INews } from "../../redux/news/types";
 
 const FullNews = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [item, setItem] = useState<INews>();
   const { news } = useSelector(selectNews);
-  const item = news.find(n => n.id === id);
+  //const item = news.find(n => n.id === id);
 
   const goBack = () => navigate(-1);
+
+  useEffect(() => {
+    axios.get(`/news/${id}`)
+      .then(({ data }) => setItem(data))
+      .catch(err => {
+        console.warn(err);
+        alert('Ошибка при открытии!');
+      });
+  }, []);
 
   return (
     <div className="full">
@@ -30,7 +42,7 @@ const FullNews = () => {
                 <Person sx={{ width: 25, height: 25 }}/>
               </Avatar>
               <div>
-                <p><em>Автор:</em> Иванов Сергей</p>
+                <p><em>Автор:</em> {item.user.firstName} {item.user.lastName}</p>
                 <p><em>Дата создания:</em> {item.createdAt}</p>
               </div>
             </div>
@@ -38,7 +50,7 @@ const FullNews = () => {
             <ul className="full__main-details">
               <li>
                 <RemoveRedEyeOutlined/>
-                <span>150</span>
+                <span>{item.viewsCount}</span>
               </li>
               <li>
                 <ChatBubbleOutlineOutlined/>
