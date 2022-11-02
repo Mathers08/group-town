@@ -2,12 +2,13 @@ import React, { FC } from 'react';
 import './Home.scss';
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectAuth } from "../../redux/auth/selectors";
 
-interface HomeProps {
-  isAuth: boolean;
-}
+const Home: FC = () => {
+  const { data } = useSelector(selectAuth);
+  const isAuth = Boolean(data);
 
-const Home: FC<HomeProps> = ({ isAuth }) => {
   return (
     <div className="home">
       <div className="home__wrapper">

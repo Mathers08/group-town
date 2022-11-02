@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
 import { Header, Navbar } from "./components";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes, useLocation } from "react-router-dom";
 import {
+  ArticleEditor,
+  Articles,
   FullNews,
   GroupList,
   Home,
+  Login,
   News,
-  ArticleEditor,
   Performance,
   Profile,
   Progress,
   Schedule,
-  SignIn,
   SignUp,
-  Todos, Articles
+  Todos
 } from "./pages";
+import { useSelector } from "react-redux";
+import { selectAuth } from "./redux/auth/selectors";
+import { useAppDispatch } from "./hooks";
+import { fetchMe } from "./redux/auth/slice";
 
 // a.split(' ').slice(0, 2).map(e => e[0]).join('');
 const theme = createTheme({
@@ -39,21 +44,26 @@ const theme = createTheme({
   }
 });
 
-const isAuth = true;
-
 const App = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch();
+  const { data } = useSelector(selectAuth);
+  const isAuth = Boolean(data);
+
+  useEffect(() => {
+    dispatch(fetchMe());
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline/>
       <Routes>
-        <Route path="/" element={<Home isAuth={isAuth}/>}/>
+        <Route path="/" element={<Home/>}/>
       </Routes>
       {isAuth && location.pathname !== '/'
         ?
         <>
-          <Header isAuth={isAuth}/>
+          <Header/>
           <div className="wrapper">
             <Navbar/>
             <div className="wrapper__content">
@@ -75,7 +85,7 @@ const App = () => {
         :
         <Routes>
           <Route path="/signup" element={<SignUp/>}/>
-          <Route path="/login" element={<SignIn/>}/>
+          <Route path="/login" element={<Login/>}/>
         </Routes>
       }
     </ThemeProvider>

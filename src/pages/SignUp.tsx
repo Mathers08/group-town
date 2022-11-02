@@ -15,27 +15,38 @@ import {
 import 'dayjs/locale/ru';
 import { LockOutlined } from '@mui/icons-material';
 import { Copyright } from "../components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Controller, useForm } from "react-hook-form";
 import dayjs from "dayjs";
+import { useAppDispatch } from "../hooks";
+import { fetchLogin, fetchRegister } from "../redux/auth/slice";
 
 const SignUp = () => {
-  const { register, handleSubmit, control, setError, formState: { errors, isValid } } = useForm({
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { register, handleSubmit, control, formState: { errors } } = useForm({
     defaultValues: {
       lastName: '',
       firstName: '',
-      gender: 'male',
-      birthday: dayjs('2001-01-01'),
+      gender: 'Мужской',
+      birthday: dayjs("01-02-2001", "DD-MM-YYYY"),
       email: '',
       password: ''
     },
     mode: 'onChange'
   });
 
-  const onSubmit = (values: any) => {
-    console.log(values);
+  const onSubmit = async (values: any) => {
+    const data = await dispatch(fetchRegister(values));
+    if (!data.payload) {
+      alert('Не удалось зарегистрироваться!');
+    }
+    if ('token' in data.payload) {
+      window.localStorage.setItem('token', data.payload.token);
+      navigate("/announcement/news");
+    }
   };
 
   return (
@@ -77,8 +88,8 @@ const SignUp = () => {
                 name="gender"
                 render={({ field }) => (
                   <RadioGroup {...field}>
-                    <FormControlLabel value="male" control={<Radio/>} label="Мужской"/>
-                    <FormControlLabel value="female" control={<Radio/>} label="Женский"/>
+                    <FormControlLabel value="Мужской" control={<Radio/>} label="Мужской"/>
+                    <FormControlLabel value="Женский" control={<Radio/>} label="Женский"/>
                   </RadioGroup>
                 )}
               />
@@ -91,7 +102,7 @@ const SignUp = () => {
                   <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
                     <DesktopDatePicker
                       label="Дата рождения"
-                      inputFormat="MM/DD/YYYY"
+                      inputFormat="DD/MM/YYYY"
                       value={field.value}
                       onChange={(date) => field.onChange(date)}
                       renderInput={(params) => <TextField {...params} />}

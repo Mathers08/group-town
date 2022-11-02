@@ -1,8 +1,4 @@
-export enum NewsStatusEnum {
-  LOADING = 'LOADING',
-  SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR'
-}
+import { IUser, StatusEnum } from "../auth/types";
 
 export enum NewsImportanceEnum {
   EASY = 'green',
@@ -16,11 +12,12 @@ export interface INews {
   content: string;
   importance: string;
   viewsCount: number;
-  user: { firstName: string, lastName: string };
+  user: IUser;
   createdAt: string;
+  isEditable: boolean;
 }
 
 export interface NewsState {
   news: INews[];
-  status: NewsStatusEnum;
+  status: StatusEnum;
 }

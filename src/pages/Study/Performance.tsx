@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Accordion,
   AccordionDetails,
@@ -16,12 +16,17 @@ import {
   Typography
 } from '@mui/material';
 import { ExpandMore, Person } from '@mui/icons-material';
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../hooks";
+import { fetchUsers } from "../../redux/auth/slice";
+import { selectAuth } from "../../redux/auth/selectors";
 
 enum ExamDisciplineEnum {
   EXAM = 'EXAM',
   TEST = 'TEST',
   DIFF = 'DIFF'
 }
+
 interface IDiscipline {
   name: string,
   lecturer: string,
@@ -31,7 +36,8 @@ interface IDiscipline {
 }
 
 const Performance = () => {
-  const users = ['Иванов Сергей', 'Петров Алексей', 'Сидоров Олег'];
+  const dispatch = useAppDispatch();
+  const { users } = useSelector(selectAuth);
   const disciplines = [
     {
       name: 'Базы данных',
@@ -123,9 +129,13 @@ const Performance = () => {
     );
   };
 
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
   return (
     <div>
-      <h1 className='page__header'>{"\u00a0"}Успеваемость</h1>
+      <h1 className="page__header">{"\u00a0"}Успеваемость</h1>
       {users.map(user => (
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMore/>}>
@@ -133,7 +143,7 @@ const Performance = () => {
               <Avatar sx={{ width: 50, height: 50 }}>
                 <Person sx={{ width: 25, height: 25 }}/>
               </Avatar>
-              <Typography variant="h6">{user}</Typography>
+              <Typography variant="h6">{user.lastName} {user.firstName}</Typography>
             </div>
           </AccordionSummary>
           <AccordionDetails>

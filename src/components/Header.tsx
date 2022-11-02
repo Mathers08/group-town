@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import {
   AppBar,
   Avatar,
@@ -14,16 +14,26 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
-import { AccountCircle, Group, LineStyle, Logout, Newspaper } from "@mui/icons-material";
+import { AccountCircle, Group, Logout, Newspaper, Person } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { logo1, logo2 } from '../assets';
+import { useSelector } from "react-redux";
+import { selectAuth } from "../redux/auth/selectors";
+import { useAppDispatch } from "../hooks";
+import { logout } from "../redux/auth/slice";
 
-interface HeaderProps {
-  isAuth: boolean;
-}
+const Header: FC = () => {
+  const dispatch = useAppDispatch();
+  const { data } = useSelector(selectAuth);
+  const isAuth = Boolean(data);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-const Header: FC<HeaderProps> = ({ isAuth }) => {
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
+  const handleCloseUserMenu = () => setAnchorElUser(null);
+  const onLogoutClick = () => {
+    dispatch(logout());
+    window.localStorage.removeItem('token');
+  };
   const settings = [
     {
       id: 0,
@@ -43,16 +53,7 @@ const Header: FC<HeaderProps> = ({ isAuth }) => {
       icon: <Newspaper/>,
       link: '/announcement/news'
     },
-    {
-      id: 3,
-      title: 'Выйти',
-      icon: <Logout/>,
-      link: '/login'
-    }
   ];
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
-  const handleCloseUserMenu = () => setAnchorElUser(null);
 
   return (
     <AppBar position="static" sx={{ background: 'transparent' }}>
@@ -68,9 +69,13 @@ const Header: FC<HeaderProps> = ({ isAuth }) => {
             ?
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>
-                </IconButton>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+                  <h3 style={{ color: 'black' }}>{data && data.firstName} {data && data.lastName}</h3>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar sx={{ width: 40, height: 40 }}>
+                      <Person sx={{ width: 20, height: 20 }}/>
+                    </Avatar>
+                  </IconButton></div>
               </Tooltip>
               <Menu
                 sx={{ mt: '45px' }}
@@ -92,6 +97,12 @@ const Header: FC<HeaderProps> = ({ isAuth }) => {
                     </MenuItem>
                   </Link>
                 ))}
+                <Link to="/login">
+                  <MenuItem onClick={onLogoutClick}>
+                    <ListItemIcon><Logout/></ListItemIcon>
+                    <Typography>Выйти</Typography>
+                  </MenuItem>
+                </Link>
               </Menu>
             </Box>
             :

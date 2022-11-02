@@ -1,22 +1,34 @@
 import React from 'react';
 import { Avatar, Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
 import { LockOutlined } from '@mui/icons-material';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Copyright } from "../components";
 import { useForm } from 'react-hook-form';
+import { useAppDispatch } from "../hooks";
+import { fetchLogin } from "../redux/auth/slice";
 
-const SignIn = () => {
-  const { register, handleSubmit, setError, formState: { errors, isValid } } = useForm({
+const Login = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      email: '',
-      password: ''
+      email: 'test@test.ru',
+      password: '123488'
     },
     mode: 'onChange'
   });
 
-  const onSubmit = (values: any) => {
-    console.log(values);
+  const onSubmit = async (values: any) => {
+    const data = await dispatch(fetchLogin(values));
+    if (!data.payload) {
+      alert('Не удалось авторизоваться!');
+    }
+    if ('token' in data.payload) {
+      window.localStorage.setItem('token', data.payload.token);
+      navigate("/announcement/news");
+    }
   };
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -64,4 +76,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;

@@ -1,15 +1,21 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { INews, NewsStatusEnum, NewsState } from "./types";
+import { INews, NewsState } from "./types";
+import { StatusEnum } from "../auth/types";
 import axios from "../../axios";
 
-export const fetchNews = createAsyncThunk('/news/fetchNews', async () => {
+export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
   const { data } = await axios.get('/news');
+  return data;
+});
+
+export const fetchRemove = createAsyncThunk('news/fetchRemove', async (id: string) => {
+  const { data } = await axios.delete(`/news/${id}`);
   return data;
 });
 
 const initialState: NewsState = {
   news: [],
-  status: NewsStatusEnum.LOADING
+  status: StatusEnum.LOADING
 };
 
 export const slice = createSlice({
@@ -29,16 +35,20 @@ export const slice = createSlice({
   extraReducers: builder => {
     builder.addCase(fetchNews.pending, (state) => {
       state.news = [];
-      state.status = NewsStatusEnum.LOADING;
-    })
+      state.status = StatusEnum.LOADING;
+    });
     builder.addCase(fetchNews.fulfilled, (state, action) => {
       state.news = action.payload;
-      state.status = NewsStatusEnum.SUCCESS;
-    })
+      state.status = StatusEnum.SUCCESS;
+    });
     builder.addCase(fetchNews.rejected, (state) => {
       state.news = [];
-      state.status = NewsStatusEnum.ERROR;
-    })
+      state.status = StatusEnum.ERROR;
+    });
+
+    builder.addCase(fetchRemove.pending, (state, action) => {
+      state.news = state.news.filter(obj => obj._id !== action.meta.arg);
+    });
   }
 });
 

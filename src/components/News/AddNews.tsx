@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./News.scss";
@@ -9,6 +9,7 @@ import { INews, NewsImportanceEnum } from "../../redux/news/types";
 import { addNews } from "../../redux/news/slice";
 import { formatDate } from "../../utils";
 import { Button } from "@mui/material";
+import axios from "../../axios";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
@@ -30,10 +31,11 @@ const AddNews = () => {
     },
   ];
   const [isFocused, setIsFocused] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
-  const [importance, setImportance] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [importance, setImportance] = useState('');
 
   const onHeaderClick = () => setIsFocused(true);
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
@@ -42,26 +44,27 @@ const AddNews = () => {
     setSelectedId(id);
     setImportance(color);
   };
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const newItem: INews = {
-      _id: uuidv4(),
-      title,
-      content,
-      importance,
-      viewsCount: 0,
-      user: {firstName: '', lastName: ''},
-      createdAt: formatDate(new Date)
-    };
-    if (title.trim() !== "" && content.trim() !== "" && importance !== '') {
-      dispatch(addNews(newItem));
-      toast.success("Новость успешно добавлена!");
-      setSelectedId(-1);
-      setTitle('');
-      setContent('');
-      setImportance('');
-    } else {
-      toast.error("Пожалуйста, заполните все поля!");
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true)
+      const newItem = {
+        title,
+        content,
+        importance,
+        createdAt: formatDate(new Date),
+      };
+      if (title.trim() !== "" && content.trim() !== "" && importance !== '') {
+        await axios.post('/news', newItem);
+        toast.success("Новость успешно добавлена!");
+        setSelectedId(-1);
+        setTitle('');
+        setContent('');
+        setImportance('');
+      } else {
+        toast.error("Пожалуйста, заполните все поля!");
+      }
+      } catch (e) {
+
     }
   };
 
