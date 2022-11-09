@@ -1,10 +1,15 @@
+import { IUser, StatusEnum } from "../auth/types";
+
 export interface ITodo {
-  id: string;
+  _id: string;
   title: string;
   content: string;
-  isComplete: boolean;
+  isCompleted: boolean;
+  isEditable: boolean;
+  user: IUser;
 }
 
 export interface TodosState {
   todos: ITodo[];
+  status: StatusEnum;
 }

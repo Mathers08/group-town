@@ -12,8 +12,8 @@ const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      email: 'test@test.ru',
-      password: '123488'
+      email: 'mathers@mail.com',
+      password: '123456'
     },
     mode: 'onChange'
   });

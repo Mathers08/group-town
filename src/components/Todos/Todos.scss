@@ -138,12 +138,14 @@
   }
 
   &__title {
+    max-width: 680px;
     word-wrap: break-word;
     font-size: 24px;
     margin: 15px 0;
   }
 
   &__content {
+    max-width: 680px;
     margin-top: 25px;
     white-space: pre-line;
     font-size: 18px;

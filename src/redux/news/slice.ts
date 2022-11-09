@@ -25,12 +25,6 @@ export const slice = createSlice({
     addNews: (state, action: PayloadAction<INews>) => {
       state.news.unshift(action.payload);
     },
-    deleteNews: (state, action: PayloadAction<string>) => {
-      state.news = state.news.filter(n => n._id !== action.payload);
-    },
-    editNews: (state, action: PayloadAction<INews>) => {
-      state.news = state.news.map(n => n._id === action.payload._id ? action.payload : n);
-    },
   },
   extraReducers: builder => {
     builder.addCase(fetchNews.pending, (state) => {
@@ -54,7 +48,5 @@ export const slice = createSlice({
 
 export const {
   addNews,
-  deleteNews,
-  editNews
 } = slice.actions;
 export default slice.reducer;

@@ -21,7 +21,7 @@ const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
       <span className="item__importance" style={{ background: `linear-gradient(${importance}, #d3d3d3)` }}/>
       <div className="item__title">
         <h2>{title}</h2>
-        {isEditable && <div>
+        {isEditable && <div style={{ display: 'flex' }}>
           <IconButton onClick={() => onDeleteClick(_id)}><Edit/></IconButton>
           <IconButton onClick={() => onDeleteClick(_id)}><Close/></IconButton>
         </div>}

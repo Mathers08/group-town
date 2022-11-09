@@ -1,21 +1,30 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import "./Todos.scss";
 import { useAppDispatch } from "../../hooks";
 import { useSelector } from "react-redux";
 import { selectTodos } from "../../redux/todos/selectors";
 import TodoItem from "./TodoItem";
-import { clearAll } from "../../redux/todos/slice";
+import { clearAll, fetchTodos } from "../../redux/todos/slice";
 import DropDown from "./DropDown";
 import { StickyNote2 } from '@mui/icons-material';
 import Modal from "../Modal";
 import { toast } from "react-toastify";
+import { selectAuth } from "../../redux/auth/selectors";
+import NewsSkeleton from "../News/NewsSkeleton";
+import { StatusEnum } from "../../redux/auth/types";
 
 const TodoList = () => {
   const [all, setAll] = useState(true);
   const [isModalActive, setIsModalActive] = useState(false);
   const dispatch = useAppDispatch();
-  const { todos } = useSelector(selectTodos);
-  const doneTodos = todos.filter(todo => todo.isComplete);
+  const { todos, status } = useSelector(selectTodos);
+  const { data } = useSelector(selectAuth);
+  const doneTodos = todos.filter(todo => todo.isCompleted);
+  const isTodosLoading = status === StatusEnum.LOADING;
+  const skeletons = [...Array(4)].map((_, index) => <NewsSkeleton key={index}/>);
+  const fetchedTodos = todos.map(obj => <TodoItem key={obj._id} {...obj} isEditable={data?._id === obj.user._id}/>);
+  const fetchedDoneTodos = doneTodos.map(obj => <TodoItem key={obj._id} {...obj}
+                                                          isEditable={data?._id === obj.user._id}/>);
 
   const onModalClick = () => setIsModalActive(!isModalActive);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +40,10 @@ const TodoList = () => {
     toast.success("Задачи успешно удалены!");
   };
 
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, []);
+
   return (
     <div className="todoList">
       <div className="todoList__title">
@@ -42,11 +55,7 @@ const TodoList = () => {
         <button onClick={todos.length > 0 ? onModalClick : undefined} className="clear-all">Удалить все</button>
       </div>}
       <div className="todoList__container">
-        {todos.length ? (
-          all
-            ? todos.map(todo => <TodoItem key={todo.id} {...todo}/>)
-            : doneTodos.map(todo => <TodoItem key={todo.id} {...todo}/>)
-        ) : <h4 className="nothing">На данный момент у вас нет задач!</h4>}
+        {isTodosLoading ? skeletons : (all ? fetchedTodos : fetchedDoneTodos)}
       </div>
       <Modal active={isModalActive} setActive={setIsModalActive}>
         <div className={isModalActive ? "popUp popUp__show" : "popUp"}>

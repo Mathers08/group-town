@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../hooks";
 import { addTodo } from "../../redux/todos/slice";
 import { ITodo } from "../../redux/todos/types";
 import { v4 as uuidv4 } from 'uuid';
+import axios from "../../axios";
 
 const AddTask = () => {
   const dispatch = useAppDispatch();
@@ -15,16 +16,15 @@ const AddTask = () => {
 
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
   const onContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value);
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const newTodo: ITodo = {
-      id: uuidv4(),
+  const handleSubmit = async () => {
+    const newTodo = {
+      _id: uuidv4(),
       title,
       content,
-      isComplete: false
+      isCompleted: false,
     };
     if (title.trim() !== "" && content.trim() !== "") {
-      dispatch(addTodo(newTodo));
+      await axios.post('/todos', newTodo);
       toast.success("Задача успешно добавлена!");
       setTitle('');
       setContent('');

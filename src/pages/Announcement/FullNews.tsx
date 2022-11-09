@@ -33,8 +33,10 @@ const FullNews = () => {
             <IconButton onClick={goBack} sx={{ position: 'absolute', top: 20, left: -20, width: 60, height: 60 }}>
               <ArrowBack/>
             </IconButton>
-            <h1 className="full__top-title">{item.title}</h1>
-            <div className="full__top-line" style={{ background: item.importance }}/>
+            <h1 className="full__top-title">
+              {item.title}
+              <div className="title-line" style={{ background: item.importance }}/>
+            </h1>
           </div>
           <div className="full__main">
             <div className="full__main-info">
