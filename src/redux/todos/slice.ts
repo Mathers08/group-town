@@ -34,9 +34,6 @@ export const slice = createSlice({
       copyTodos[index].isCompleted = !copyTodos[index].isCompleted;
       state.todos = copyTodos;
     },
-    editTodo: (state, action) => {
-      state.todos = state.todos.map(todo => todo._id === action.payload._id ? action.payload : todo);
-    },
   },
   extraReducers: builder => {
     builder.addCase(fetchTodos.pending, (state) => {
@@ -62,6 +59,5 @@ export const {
   addTodo,
   clearAll,
   doneTodo,
-  editTodo,
 } = slice.actions;
 export default slice.reducer;

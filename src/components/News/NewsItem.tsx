@@ -6,6 +6,7 @@ import { Close, Edit } from '@mui/icons-material';
 import { useAppDispatch } from "../../hooks";
 import { fetchRemove } from "../../redux/news/slice";
 import { Link } from "react-router-dom";
+import { Modal } from "../index";
 
 const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
   const dispatch = useAppDispatch();
