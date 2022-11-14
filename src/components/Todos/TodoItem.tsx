@@ -59,7 +59,10 @@ const TodoItem = ({ _id, title, content, isCompleted, isEditable }: ITodo) => {
         </p>
       </div>
 
-      <Modal active={isModalActive} setActive={setIsModalActive}>
+      <Modal props={{
+        active: isModalActive,
+        setActive: setIsModalActive,
+      }}>
         <div className={isModalActive ? "popUp popUp__show" : "popUp"}>
           <h4 className="pop-up__title">Редактирование задачи</h4>
           <form onSubmit={handleSubmit}>

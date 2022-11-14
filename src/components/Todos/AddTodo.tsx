@@ -1,6 +1,4 @@
 import { ChangeEvent, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "./Todos.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";
@@ -25,17 +23,13 @@ const AddTask = () => {
     };
     if (title.trim() !== "" && content.trim() !== "") {
       await axios.post('/todos', newTodo);
-      toast.success("Задача успешно добавлена!");
       setTitle('');
       setContent('');
-    } else {
-      toast.error("Пожалуйста, заполните все поля!");
     }
   };
 
   return (
     <div className="addTodo">
-      <ToastContainer/>
       <div className="addTodo__title">
         <TextSnippetIcon sx={{ wight: '25px' }}/>
         <h2 className="addTodo__title-text">Создание новой задачи</h2>

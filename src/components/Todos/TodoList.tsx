@@ -8,23 +8,25 @@ import { clearAll, fetchTodos } from "../../redux/todos/slice";
 import DropDown from "./DropDown";
 import { StickyNote2 } from '@mui/icons-material';
 import Modal from "../Modal";
-import { toast } from "react-toastify";
 import { selectAuth } from "../../redux/auth/selectors";
 import NewsSkeleton from "../News/NewsSkeleton";
 import { StatusEnum } from "../../redux/auth/types";
 
 const TodoList = () => {
+  const dispatch = useAppDispatch();
   const [all, setAll] = useState(true);
   const [isModalActive, setIsModalActive] = useState(false);
-  const dispatch = useAppDispatch();
   const { todos, status } = useSelector(selectTodos);
   const { data } = useSelector(selectAuth);
   const doneTodos = todos.filter(todo => todo.isCompleted);
   const isTodosLoading = status === StatusEnum.LOADING;
   const skeletons = [...Array(4)].map((_, index) => <NewsSkeleton key={index}/>);
-  const fetchedTodos = todos.map(obj => <TodoItem key={obj._id} {...obj} isEditable={data?._id === obj.user._id}/>);
-  const fetchedDoneTodos = doneTodos.map(obj => <TodoItem key={obj._id} {...obj}
-                                                          isEditable={data?._id === obj.user._id}/>);
+  const fetchedTodos = todos
+    .filter(obj => obj.user._id === data?._id)
+    .map(obj => <TodoItem key={obj._id} {...obj} isEditable={data?._id === obj.user._id}/>);
+  const fetchedDoneTodos = doneTodos
+    .filter(obj => obj.user._id === data?._id)
+    .map(obj => <TodoItem key={obj._id} {...obj} isEditable={data?._id === obj.user._id}/>);
 
   const onModalClick = () => setIsModalActive(!isModalActive);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +39,6 @@ const TodoList = () => {
   const onClearClick = () => {
     dispatch(clearAll());
     onModalClick();
-    toast.success("Задачи успешно удалены!");
   };
 
   useEffect(() => {
@@ -57,7 +58,10 @@ const TodoList = () => {
       <div className="todoList__container">
         {isTodosLoading ? skeletons : (all ? fetchedTodos : fetchedDoneTodos)}
       </div>
-      <Modal active={isModalActive} setActive={setIsModalActive}>
+      <Modal props={{
+        active: isModalActive,
+        setActive: setIsModalActive,
+      }}>
         <div className={isModalActive ? "popUp popUp__show" : "popUp"}>
           <h3>Вы уверены, что хотите удалить все?</h3>
           <div className="popUp__buttons">

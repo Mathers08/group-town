@@ -1,0 +1,27 @@
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &-name {
+      font-size: 60px;
+      line-height: 1;
+    }
+
+    &-less {
+      p {
+        font-family: monospace;
+      }
+    }
+
+    &-buttons {
+      display: flex;
+      gap: 20px;
+    }
+  }
+}

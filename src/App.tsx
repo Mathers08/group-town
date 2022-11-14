@@ -16,7 +16,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Poppins',
+      'Fira Sans',
       'BlinkMacSystemFont',
       '"Segoe UI"',
       'Roboto',

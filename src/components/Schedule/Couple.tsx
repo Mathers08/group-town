@@ -56,7 +56,13 @@ const Couple: FC<CoupleProps> = ({ id, subject, audience, lecturer, coupleColor 
           style={{ background: editColor }}>
         {!isTyping ? <Info/> : <br/>}
         {isModalActive &&
-          <Modal active={isModalActive} setActive={setIsModalActive} color={editColor}>
+          <Modal props={{
+            active: isModalActive,
+            setActive: setIsModalActive,
+            color: editColor,
+            width: 350,
+            height: 350,
+          }}>
             <div>
               <form onSubmit={handleSubmit}>
                 <h3 style={{ color: textColor }}>Предмет</h3>

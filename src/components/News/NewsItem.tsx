@@ -58,9 +58,12 @@ const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
           <Button variant="contained">Читать дальше</Button>
         </Link>
       }
-      <Modal active={isModalActive} setActive={setIsModalActive}>
+      <Modal props={{
+        active: isModalActive,
+        setActive: setIsModalActive,
+      }}>
         <div className={isModalActive ? "popUp popUp__show" : "popUp"}>
-          <h4 className="pop-up__title">Редактирование задачи</h4>
+          <h4 className="popUp__title">Редактирование задачи</h4>
           <form onSubmit={handleSubmit}>
             <input value={titleEdit} onChange={onTitleChange} className="popUp__input"/>
             <textarea value={contentEdit} onChange={onContentChange} className="popUp__content"/>

@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import "./News.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";

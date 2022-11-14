@@ -61,7 +61,7 @@ const Header: FC = () => {
         <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Link to="/announcement/news" style={{ display: 'flex' }}>
             <img src={logo1} alt=""/>
-            <h1 style={{ letterSpacing: -1 }}>roup</h1>
+            <h1>roup</h1>
             <img src={logo2} alt=""/>
             <h1 style={{ marginLeft: '-7px' }}>own</h1>
           </Link>
@@ -70,7 +70,7 @@ const Header: FC = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-                  <h3 style={{ color: 'black' }}>{data && data.firstName} {data && data.lastName}</h3>
+                  <h3 style={{ color: 'black' }}>{data?.firstName} {data?.lastName}</h3>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar sx={{ width: 40, height: 40 }}>
                       <Person sx={{ width: 20, height: 20 }}/>
