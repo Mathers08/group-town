@@ -59,7 +59,7 @@ const Header: FC = () => {
     <AppBar position="static" sx={{ background: 'transparent' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Link to="/dashboard" style={{ display: 'flex' }}>
+          <Link to="/announcement/news" style={{ display: 'flex' }}>
             <img src={logo1} alt=""/>
             <h1 style={{ letterSpacing: -1 }}>roup</h1>
             <img src={logo2} alt=""/>

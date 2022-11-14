@@ -3,7 +3,6 @@ import "./Todos.scss";
 import { ITodo } from "../../redux/todos/types";
 import { useAppDispatch } from "../../hooks";
 import { doneTodo, fetchRemove } from "../../redux/todos/slice";
-import { toast } from "react-toastify";
 import { Modal } from "../index";
 import { Clear, Done, ModeEdit } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -34,7 +33,6 @@ const TodoItem = ({ _id, title, content, isCompleted, isEditable }: ITodo) => {
       isCompleted
     };
     await axios.patch(`/todos/${_id}`, updatedTodo);
-    toast.success("Задача успешно отредактирована!");
     setIsModalActive(false);
   };
   const onDeleteClick = (id: string) => {

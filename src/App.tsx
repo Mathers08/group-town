@@ -3,21 +3,7 @@ import './App.scss';
 import { Header, Navbar } from "./components";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes, useLocation } from "react-router-dom";
-import {
-  ArticleEditor,
-  Articles,
-  FullNews,
-  GroupList,
-  Home,
-  Login,
-  News,
-  Performance,
-  Profile,
-  Progress,
-  Schedule,
-  SignUp,
-  Todos
-} from "./pages";
+import { FullNews, GroupList, Home, Login, News, Performance, Profile, Schedule, SignUp, Todos } from "./pages";
 import { useSelector } from "react-redux";
 import { selectAuth } from "./redux/auth/selectors";
 import { useAppDispatch } from "./hooks";
@@ -72,11 +58,8 @@ const App = () => {
                 <Route path="/group" element={<GroupList/>}/>
                 <Route path="/announcement/news" element={<News/>}/>
                 <Route path="/announcement/news/:id" element={<FullNews/>}/>
-                <Route path="/announcement/articles" element={<Articles/>}/>
-                <Route path="/announcement/articles/editor" element={<ArticleEditor/>}/>
                 <Route path="/announcement/todos" element={<Todos/>}/>
                 <Route path="/study/performance" element={<Performance/>}/>
-                <Route path="/study/progress" element={<Progress/>}/>
                 <Route path="/study/schedule" element={<Schedule/>}/>
               </Routes>
             </div>

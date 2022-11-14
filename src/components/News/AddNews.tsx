@@ -1,12 +1,9 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import React, { ChangeEvent, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import "./News.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";
-import { v4 as uuidv4 } from 'uuid';
-import { INews, NewsImportanceEnum } from "../../redux/news/types";
-import { addNews } from "../../redux/news/slice";
+import { NewsImportanceEnum } from "../../redux/news/types";
 import { formatDate } from "../../utils";
 import { Button } from "@mui/material";
 import axios from "../../axios";
@@ -45,32 +42,24 @@ const AddNews = () => {
     setImportance(color);
   };
   const handleSubmit = async () => {
-    try {
-      setIsLoading(true)
-      const newItem = {
-        title,
-        content,
-        importance,
-        createdAt: formatDate(new Date),
-      };
-      if (title.trim() !== "" && content.trim() !== "" && importance !== '') {
-        await axios.post('/news', newItem);
-        toast.success("Новость успешно добавлена!");
-        setSelectedId(-1);
-        setTitle('');
-        setContent('');
-        setImportance('');
-      } else {
-        toast.error("Пожалуйста, заполните все поля!");
-      }
-      } catch (e) {
-
+    setIsLoading(true);
+    const newItem = {
+      title,
+      content,
+      importance,
+      createdAt: formatDate(new Date),
+    };
+    if (title.trim() !== "" && content.trim() !== "" && importance !== '') {
+      await axios.post('/news', newItem);
+      setSelectedId(-1);
+      setTitle('');
+      setContent('');
+      setImportance('');
     }
   };
 
   return (
     <div className="addNews">
-      <ToastContainer/>
       <div className="addNews__title">
         <TextSnippetIcon sx={{ wight: '25px' }}/>
         <h2 className="addNews__title-text">Что нового?</h2>

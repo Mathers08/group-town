@@ -41,11 +41,6 @@ const Navbar = () => {
           title: 'Новости',
         },
         {
-          link: 'announcement/articles',
-          icon: <ReceiptLong/>,
-          title: 'Статьи',
-        },
-        {
           link: 'announcement/todos',
           icon: <ListAlt/>,
           title: 'Список дел',
@@ -61,11 +56,6 @@ const Navbar = () => {
           link: 'study/performance',
           icon: <CreditScore/>,
           title: 'Успеваемость',
-        },
-        {
-          link: 'study/progress',
-          icon: <PublishedWithChanges/>,
-          title: 'Прогресс',
         },
         {
           link: 'study/schedule',
