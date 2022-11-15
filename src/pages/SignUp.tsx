@@ -31,7 +31,7 @@ const SignUp = () => {
       lastName: '',
       firstName: '',
       gender: 'Мужской',
-      birthday: dayjs("01-02-2001", "DD-MM-YYYY"),
+      birthday: dayjs("2001-02-01T15:21:29.262Z").format( "DD/MM/YYYY"),
       email: '',
       password: ''
     },
@@ -46,6 +46,8 @@ const SignUp = () => {
     if ('token' in data.payload) {
       window.localStorage.setItem('token', data.payload.token);
       navigate("/announcement/news");
+      console.log(data);
+
     }
   };
 

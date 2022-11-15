@@ -1,11 +1,10 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import "./Todos.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";
-import { addTodo } from "../../redux/todos/slice";
-import { ITodo } from "../../redux/todos/types";
 import { v4 as uuidv4 } from 'uuid';
 import axios from "../../axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddTask = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +13,7 @@ const AddTask = () => {
 
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
   const onContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value);
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     const newTodo = {
       _id: uuidv4(),
       title,
@@ -25,11 +24,15 @@ const AddTask = () => {
       await axios.post('/todos', newTodo);
       setTitle('');
       setContent('');
+    } else {
+      e.preventDefault();
+      toast.error('Пожалуйста, заполните все поля!');
     }
   };
 
   return (
     <div className="addTodo">
+      <ToastContainer/>
       <div className="addTodo__title">
         <TextSnippetIcon sx={{ wight: '25px' }}/>
         <h2 className="addTodo__title-text">Создание новой задачи</h2>

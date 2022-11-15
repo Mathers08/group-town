@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.scss';
+import "react-toastify/dist/ReactToastify.css";
 import { Header, Navbar } from "./components";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -8,6 +9,10 @@ import { useSelector } from "react-redux";
 import { selectAuth } from "./redux/auth/selectors";
 import { useAppDispatch } from "./hooks";
 import { fetchMe } from "./redux/auth/slice";
+import dayjs from "dayjs";
+import 'dayjs/locale/ru.js';
+
+dayjs.locale('ru');
 
 // a.split(' ').slice(0, 2).map(e => e[0]).join('');
 const theme = createTheme({

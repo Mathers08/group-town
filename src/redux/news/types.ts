@@ -14,6 +14,7 @@ export interface INews {
   viewsCount: number;
   user: IUser;
   createdAt: string;
+  updatedTime: string;
   isEditable: boolean;
 }
 

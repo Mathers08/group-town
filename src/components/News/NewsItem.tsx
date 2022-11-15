@@ -8,6 +8,8 @@ import { fetchRemove } from "../../redux/news/slice";
 import { Link } from "react-router-dom";
 import { Modal } from "../index";
 import axios from "../../axios";
+import { formatDate } from "../../utils";
+import dayjs from "dayjs";
 
 const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
   const dispatch = useAppDispatch();
@@ -31,6 +33,7 @@ const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
       _id,
       title: titleEdit,
       content: contentEdit,
+      updatedTime: dayjs().format('D MMMM YYYY HH:mm')
     };
     await axios.patch(`/news/${_id}`, updatedNews);
     setIsModalActive(false);

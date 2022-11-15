@@ -23,7 +23,7 @@ const NewsList = () => {
 
   return (
     <div className="news__list">
-      {isNewsLoading ? skeletons : allNews}
+      {isNewsLoading ? skeletons : allNews.reverse()}
     </div>
   );
 };

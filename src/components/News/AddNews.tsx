@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import "./News.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";
@@ -6,6 +6,8 @@ import { NewsImportanceEnum } from "../../redux/news/types";
 import { formatDate } from "../../utils";
 import { Button } from "@mui/material";
 import axios from "../../axios";
+import { toast, ToastContainer } from "react-toastify";
+import dayjs from "dayjs";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
@@ -40,25 +42,30 @@ const AddNews = () => {
     setSelectedId(id);
     setImportance(color);
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     const newItem = {
       title,
       content,
       importance,
-      createdAt: formatDate(new Date),
+      createdAt: dayjs().format('D MMMM YYYY HH:mm'),
+      updatedTime: dayjs().format('D MMMM YYYY HH:mm'),
     };
-    if (title.trim() !== "" && content.trim() !== "" && importance !== '') {
+    if (title.trim() && content.trim() && importance) {
       await axios.post('/news', newItem);
       setSelectedId(-1);
       setTitle('');
       setContent('');
       setImportance('');
+    } else {
+      e.preventDefault();
+      toast.error('Пожалуйста, заполните все поля!');
     }
   };
 
   return (
     <div className="addNews">
+      <ToastContainer/>
       <div className="addNews__title">
         <TextSnippetIcon sx={{ wight: '25px' }}/>
         <h2 className="addNews__title-text">Что нового?</h2>

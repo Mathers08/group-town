@@ -72,8 +72,10 @@ const Header: FC = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
                   <h3 style={{ color: 'black' }}>{data?.firstName} {data?.lastName}</h3>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar sx={{ width: 40, height: 40 }}>
-                      <Person sx={{ width: 20, height: 20 }}/>
+                    <Avatar sx={{ width: 40, height: 40 }}
+                      src='https://sun9-west.userapi.com/sun9-66/s/v1/ig2/H10wD23PMZLS5zb4BQwi5kSxUpNle5mim7PJszkvHlLUXnllNqZmNPIo_OMnv3czdAu9LQ0BBmu3CT9kVMKHy0t2.jpg?size=2160x2160&quality=96&type=album'
+                    >
+                      {/*<Person sx={{ width: 20, height: 20 }}/>*/}
                     </Avatar>
                   </IconButton></div>
               </Tooltip>

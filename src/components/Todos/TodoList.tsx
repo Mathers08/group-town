@@ -47,14 +47,16 @@ const TodoList = () => {
 
   return (
     <div className="todoList">
-      <div className="todoList__title">
-        <StickyNote2/>
-        <h2 className="todoList__title-text">Все задачи</h2>
-      </div>
-      {todos.length > 0 && <div className="todoList__sort">
-        <DropDown changeCategory={handleChange} all={all}/>
-        <button onClick={todos.length > 0 ? onModalClick : undefined} className="clear-all">Удалить все</button>
-      </div>}
+      {todos.length > 0 && <>
+        <div className="todoList__title">
+          <StickyNote2/>
+          <h2 className="todoList__title-text">Все задачи</h2>
+        </div>
+        <div className="todoList__sort">
+          <DropDown changeCategory={handleChange} all={all}/>
+          <button onClick={todos.length > 0 ? onModalClick : undefined} className="clear-all">Удалить все</button>
+        </div>
+      </>}
       <div className="todoList__container">
         {isTodosLoading ? skeletons : (all ? fetchedTodos : fetchedDoneTodos)}
       </div>
