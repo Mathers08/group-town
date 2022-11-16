@@ -3,13 +3,15 @@ import todos from './todos/slice';
 import news from './news/slice';
 import schedule from './schedule/slice';
 import auth from './auth/slice';
+import filter from './filter/slice';
 
 export const setupStore = () => configureStore({
   reducer: {
     todos,
     news,
     schedule,
-    auth
+    auth,
+    filter
   },
 });
 

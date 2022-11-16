@@ -10,8 +10,6 @@ import {
   LineStyle,
   ListAlt,
   Newspaper,
-  PublishedWithChanges,
-  ReceiptLong,
   School
 } from '@mui/icons-material';
 import { Link } from "react-router-dom";
@@ -68,14 +66,8 @@ const Navbar = () => {
 
   const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(true);
   const [isStudyOpen, setIsStudyOpen] = useState(true);
-  const onAnnouncementClick = () => {
-    console.log(isAnnouncementOpen);
-    setIsAnnouncementOpen(!isAnnouncementOpen);
-  }
-  const onStudyClick = () => {
-    console.log(isStudyOpen);
-    setIsStudyOpen(!isStudyOpen);
-  }
+  const onAnnouncementClick = () => setIsAnnouncementOpen(!isAnnouncementOpen);
+  const onStudyClick = () => setIsStudyOpen(!isStudyOpen);
 
   return (
     <List sx={{ width: '100%', maxWidth: 340 }}>
@@ -110,7 +102,7 @@ const Navbar = () => {
             </List>
           </Collapse>
         </div>
-      ))};
+      ))}
     </List>
   );
 };

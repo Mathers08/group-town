@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Button, Stack } from '@mui/material';
 import { ExpandMore, Person } from '@mui/icons-material';
 import { useSelector } from "react-redux";
@@ -8,23 +8,52 @@ import TodoList from "../../components/Todos/TodoList";
 import './Profile.scss';
 import { AddNews, Modal } from "../../components";
 import AddTodo from "../../components/Todos/AddTodo";
-import { formatDate } from "../../utils";
+import axios from "../../axios";
 
 const Profile = () => {
   const { data } = useSelector(selectAuth);
+  const imageRef = useRef<HTMLInputElement | null>(null);
+  const [imageUrl, setImageUrl] = useState('');
   const [isAddTodoActive, setIsAddTodoActive] = useState(false);
   const [isAddNewsActive, setIsAddNewsActive] = useState(false);
+
   const onTodoClick = () => setIsAddTodoActive(!isAddTodoActive);
   const onNewsClick = () => setIsAddNewsActive(!isAddNewsActive);
+  const onImageFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const formData = new FormData();
+      if (e.target.files) {
+        const file = e.target.files[0];
+        formData.append('image', file);
+      }
+      const { data } = await axios.post('/upload', formData);
+      setImageUrl(data.url);
+      const uploadedImage = {
+        avatarUrl: imageUrl
+      }
+      await axios.patch('/auth/login', uploadedImage);
+    } catch (e) {
+      console.log(e);
+      alert('Ошибка при загрузке картинки!');
+    }
+  };
 
   return (
     <>
       <div className="profile">
-        <Stack direction="row" spacing={2}>
-          <Avatar sx={{ width: 300, height: 300 }} src='https://sun9-west.userapi.com/sun9-66/s/v1/ig2/H10wD23PMZLS5zb4BQwi5kSxUpNle5mim7PJszkvHlLUXnllNqZmNPIo_OMnv3czdAu9LQ0BBmu3CT9kVMKHy0t2.jpg?size=2160x2160&quality=96&type=album'>
-            {/*<Person sx={{ width: 250, height: 250 }}/>*/}
-          </Avatar>
-        </Stack>
+        <div className="profile__avatar">
+          <Stack direction="row" spacing={2}>
+            <Avatar sx={{ width: 300, height: 300 }} src={data?.avatarUrl}>
+              {!data?.avatarUrl && <Person sx={{ width: 250, height: 250 }}/>}
+            </Avatar>
+          </Stack>
+          <div>
+            <Button onClick={() => imageRef.current?.click()} color="primary" variant="outlined" size="large">
+              Загрузить фотографию
+            </Button>
+            <input ref={imageRef} type="file" hidden onChange={onImageFileChange}/>
+          </div>
+        </div>
         <div className="profile__info">
           <h1 className="profile__info-name">{data?.firstName} {data?.lastName}</h1>
           <div className="profile__info-less">

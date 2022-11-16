@@ -1,10 +1,34 @@
 import { IUser, StatusEnum } from "../auth/types";
 
 export enum NewsImportanceEnum {
-  EASY = 'green',
-  MEDIUM = 'yellow',
-  HARD = 'red'
+  ALL = 'все',
+  EASY = 'не очень важно',
+  MEDIUM = 'средняя важность',
+  HARD = 'очень важно'
 }
+
+export const allImportance = [
+  {
+    id: 0,
+    color: '',
+    title: NewsImportanceEnum.ALL.toString()
+  },
+  {
+    id: 1,
+    color: 'green',
+    title: NewsImportanceEnum.EASY.toString()
+  },
+  {
+    id: 2,
+    color: 'yellow',
+    title: NewsImportanceEnum.MEDIUM.toString()
+  },
+  {
+    id: 3,
+    color: 'red',
+    title: NewsImportanceEnum.HARD.toString()
+  },
+];
 
 export interface INews {
   _id: string;

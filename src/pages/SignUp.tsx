@@ -47,7 +47,6 @@ const SignUp = () => {
       window.localStorage.setItem('token', data.payload.token);
       navigate("/announcement/news");
       console.log(data);
-
     }
   };
 

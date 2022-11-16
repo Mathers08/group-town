@@ -20,7 +20,7 @@ const Home: FC = () => {
           <p>Удобный инструмент для вас и ваших друзей</p>
           <h3>Начните прямо сейчас!</h3>
           <Link to={isAuth ? '/announcement/news' : '/login'}>
-            <Button variant="contained" sx={{ fontFamily: 'cursive', fontSize: '20px', borderRadius: '25px' }}>
+            <Button variant="contained" sx={{ fontSize: '20px', borderRadius: '25px' }}>
               Начать
             </Button>
           </Link>

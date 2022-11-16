@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowBack, Chat, Visibility } from '@mui/icons-material';
+import { ArrowBack, Chat, Person, Visibility } from '@mui/icons-material';
 import { Avatar, IconButton } from "@mui/material";
 import axios from "../../axios";
-import { INews } from "../../redux/news/types";
+import { allImportance, INews } from "../../redux/news/types";
 
 const FullNews = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState<INews>();
   const newsTimeInfo = item?.createdAt === item?.updatedTime ? item?.createdAt : item?.updatedTime;
+  const importanceIndex = item?.importance && allImportance.map(i => i.title).indexOf(item.importance);
+  const indexType = typeof importanceIndex === 'number';
 
   const goBack = () => navigate(-1);
 
@@ -32,15 +34,13 @@ const FullNews = () => {
             </IconButton>
             <h1 className="full__top-title">
               {item.title}
-              <div className="title-line" style={{ background: item.importance }}/>
+              <div className="title-line" style={{ background: indexType ? allImportance[importanceIndex].color : '' }}/>
             </h1>
           </div>
           <div className="full__main">
             <div className="full__main-info">
-              <Avatar sx={{ width: 50, height: 50 }}
-                      src="https://sun9-west.userapi.com/sun9-66/s/v1/ig2/H10wD23PMZLS5zb4BQwi5kSxUpNle5mim7PJszkvHlLUXnllNqZmNPIo_OMnv3czdAu9LQ0BBmu3CT9kVMKHy0t2.jpg?size=2160x2160&quality=96&type=album"
-              >
-                {/*<Person sx={{ width: 25, height: 25 }}/>*/}
+              <Avatar sx={{ width: 40, height: 40 }} src={item.user.avatarUrl}>
+                {!item.user.avatarUrl && <Person sx={{ width: 25, height: 25 }}/>}
               </Avatar>
               <div>
                 <p><em>Автор:</em> {item.user.firstName} {item.user.lastName}</p>

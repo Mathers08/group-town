@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { selectTodos } from "../../redux/todos/selectors";
 import TodoItem from "./TodoItem";
 import { clearAll, fetchTodos } from "../../redux/todos/slice";
-import DropDown from "./DropDown";
+import DropDown from "../DropDown";
 import { StickyNote2 } from '@mui/icons-material';
 import Modal from "../Modal";
 import { selectAuth } from "../../redux/auth/selectors";
@@ -14,6 +14,7 @@ import { StatusEnum } from "../../redux/auth/types";
 
 const TodoList = () => {
   const dispatch = useAppDispatch();
+  const sortItems = ['все', 'сделанные'];
   const [all, setAll] = useState(true);
   const [isModalActive, setIsModalActive] = useState(false);
   const { todos, status } = useSelector(selectTodos);
@@ -29,13 +30,6 @@ const TodoList = () => {
     .map(obj => <TodoItem key={obj._id} {...obj} isEditable={data?._id === obj.user._id}/>);
 
   const onModalClick = () => setIsModalActive(!isModalActive);
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.dataset.catagory === 'all') {
-      setAll(true);
-    } else if (e.target.dataset.catagory === 'done') {
-      setAll(false);
-    }
-  };
   const onClearClick = () => {
     dispatch(clearAll());
     onModalClick();
@@ -52,8 +46,8 @@ const TodoList = () => {
           <StickyNote2/>
           <h2 className="todoList__title-text">Все задачи</h2>
         </div>
-        <div className="todoList__sort">
-          <DropDown changeCategory={handleChange} all={all}/>
+        <div className="todoList__sort">{/*
+          <DropDown sortItems={sortItems}/>*/}
           <button onClick={todos.length > 0 ? onModalClick : undefined} className="clear-all">Удалить все</button>
         </div>
       </>}

@@ -1,14 +1,13 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button, IconButton } from "@mui/material";
 import './News.scss';
-import { INews } from "../../redux/news/types";
+import { allImportance, INews } from "../../redux/news/types";
 import { Close, Edit } from '@mui/icons-material';
 import { useAppDispatch } from "../../hooks";
 import { fetchRemove } from "../../redux/news/slice";
 import { Link } from "react-router-dom";
 import { Modal } from "../index";
 import axios from "../../axios";
-import { formatDate } from "../../utils";
 import dayjs from "dayjs";
 
 const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
@@ -16,6 +15,7 @@ const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
   const [titleEdit, setTitleEdit] = useState('');
   const [contentEdit, setContentEdit] = useState('');
   const [isModalActive, setIsModalActive] = useState(false);
+  const importanceIndex = allImportance.map(i => i.title).indexOf(importance);
 
   const onModalClick = () => {
     setIsModalActive(!isModalActive);
@@ -47,7 +47,9 @@ const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
 
   return (
     <div className="news__list-item">
-      <span className="item__importance" style={{ background: `linear-gradient(${importance}, #d3d3d3)` }}/>
+      <span className="item__importance"
+            style={{ background: `linear-gradient(${allImportance[importanceIndex].color}, #d3d3d3)` }}
+      />
       <div className="item__title">
         <h2>{title}</h2>
         {isEditable && <div style={{ display: 'flex' }}>
@@ -56,11 +58,9 @@ const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
         </div>}
       </div>
       <p className="item__text">{content.length > 185 ? slicedContent + '...' : content}</p>
-      {content.length > 185 &&
-        <Link to={`/announcement/news/${_id}`}>
-          <Button variant="contained">Читать дальше</Button>
-        </Link>
-      }
+      <Link to={`/announcement/news/${_id}`}>
+        <Button variant="contained">Подробнее</Button>
+      </Link>
       <Modal props={{
         active: isModalActive,
         setActive: setIsModalActive,

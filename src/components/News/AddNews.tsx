@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import "./News.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";
-import { NewsImportanceEnum } from "../../redux/news/types";
+import { allImportance, NewsImportanceEnum } from "../../redux/news/types";
 import { formatDate } from "../../utils";
 import { Button } from "@mui/material";
 import axios from "../../axios";
@@ -11,23 +11,7 @@ import dayjs from "dayjs";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
-  const allImportance = [
-    {
-      id: 0,
-      color: NewsImportanceEnum.EASY,
-      title: 'Не очень важно'
-    },
-    {
-      id: 1,
-      color: NewsImportanceEnum.MEDIUM,
-      title: 'Средняя важность'
-    },
-    {
-      id: 2,
-      color: NewsImportanceEnum.HARD,
-      title: 'Очень важно'
-    },
-  ];
+
   const [isFocused, setIsFocused] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
@@ -38,9 +22,9 @@ const AddNews = () => {
   const onHeaderClick = () => setIsFocused(true);
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
   const onContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value);
-  const onImportanceClick = (id: number, color: string) => {
+  const onImportanceClick = (id: number, title: string) => {
     setSelectedId(id);
-    setImportance(color);
+    setImportance(title);
   };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
@@ -74,10 +58,10 @@ const AddNews = () => {
         {isFocused && <div className="addNews__inputs-importance">
           <h4>Выберите важность:</h4>
           <div className="importance">
-            {allImportance.map(importance => (
+            {allImportance.slice(1).map(importance => (
               <div key={importance.id}
                    className="importance__item"
-                   onClick={() => onImportanceClick(importance.id, importance.color)}
+                   onClick={() => onImportanceClick(importance.id, importance.title)}
                    style={selectedId === importance.id ? { borderBottom: '2px solid whitesmoke' } : undefined}
               >
                 <div className={`circle ${importance.color}-circle`}/>

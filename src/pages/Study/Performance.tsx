@@ -37,7 +37,7 @@ interface IDiscipline {
 
 const Performance = () => {
   const dispatch = useAppDispatch();
-  const { users } = useSelector(selectAuth);
+  const { data, users } = useSelector(selectAuth);
   const disciplines = [
     {
       name: 'Базы данных',
@@ -140,10 +140,8 @@ const Performance = () => {
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMore/>}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <Avatar sx={{ width: 50, height: 50 }}
-                      src='https://sun9-west.userapi.com/sun9-66/s/v1/ig2/H10wD23PMZLS5zb4BQwi5kSxUpNle5mim7PJszkvHlLUXnllNqZmNPIo_OMnv3czdAu9LQ0BBmu3CT9kVMKHy0t2.jpg?size=2160x2160&quality=96&type=album'
-              >
-                {/*<Person sx={{ width: 25, height: 25 }}/>*/}
+              <Avatar sx={{ width: 50, height: 50 }} src={data?.avatarUrl}>
+                {!data?.avatarUrl && <Person sx={{ width: 35, height: 35 }}/>}
               </Avatar>
               <Typography variant="h6">{user.lastName} {user.firstName}</Typography>
             </div>
