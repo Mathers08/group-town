@@ -38,10 +38,10 @@ const NewsList = () => {
     }
     setCondition(true);
   };
-
   useEffect(() => {
     dispatch(fetchNews());
   }, []);
+  console.log(news);
 
   return (
     <>

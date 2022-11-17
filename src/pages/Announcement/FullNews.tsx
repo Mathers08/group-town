@@ -34,7 +34,8 @@ const FullNews = () => {
             </IconButton>
             <h1 className="full__top-title">
               {item.title}
-              <div className="title-line" style={{ background: indexType ? allImportance[importanceIndex].color : '' }}/>
+              <div className="title-line"
+                   style={{ background: indexType ? allImportance[importanceIndex].color : '' }}/>
             </h1>
           </div>
           <div className="full__main">
@@ -60,6 +61,49 @@ const FullNews = () => {
                 <span>3</span>
               </li>
             </ul>
+            <div className="full__main-comments">
+              <h2>Комментарии</h2>
+              <div className='comment'>
+                <Avatar sx={{ width: 50, height: 50 }} src={item.user.avatarUrl}>
+                  {!item.user.avatarUrl && <Person sx={{ width: 30, height: 30 }}/>}
+                </Avatar>
+                <div className='comment__info'>
+                  <div className='comment__info-author'>
+                    <p>{item.user.firstName} {item.user.lastName}</p>
+                  </div>
+                  <h4 className='comment__info-text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti dolorem dolorum, earum error
+                    harum
+                    illo, laboriosam laudantium magnam modi non nulla officia porro, quae ratione totam velit voluptatum?
+                    Accusantium at consectetur deleniti, excepturi facere itaque iusto molestiae obcaecati odio optio
+                    perspiciatis provident quos reiciendis reprehenderit sit sunt tempora totam voluptatem!
+                  </h4>
+                </div>
+              </div>              <div className='comment'>
+                <Avatar sx={{ width: 50, height: 50 }} src={item.user.avatarUrl}>
+                  {!item.user.avatarUrl && <Person sx={{ width: 30, height: 30 }}/>}
+                </Avatar>
+                <div className='comment__info'>
+                  <div className='comment__info-author'>
+                    <p>{item.user.firstName} {item.user.lastName}</p>
+                  </div>
+                  <h4 className='comment__info-text'>Lorem ipsum dolor sit amet, consectetur</h4>
+                </div>
+              </div>              <div className='comment'>
+                <Avatar sx={{ width: 50, height: 50 }} src={item.user.avatarUrl}>
+                  {!item.user.avatarUrl && <Person sx={{ width: 30, height: 30 }}/>}
+                </Avatar>
+                <div className='comment__info'>
+                  <div className='comment__info-author'>
+                    <p>{item.user.firstName} {item.user.lastName}</p>
+                  </div>
+                  <h4 className='comment__info-text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti dolorem dolorum, earum error
+                    harum
+                    illo, laboriosam laudantium magnam modi non nulla officia porro, quae ratione totam velit voluptatum?
+                  </h4>
+                </div>
+              </div>
+              <textarea name="comment" placeholder="Оставьте комментарий..."/>
+            </div>
           </div>
         </>
       }
