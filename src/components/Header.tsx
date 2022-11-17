@@ -15,15 +15,17 @@ import {
   Typography
 } from '@mui/material';
 import { AccountCircle, Group, Logout, Newspaper, Person } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { logo1, logo2 } from '../assets';
 import { useSelector } from "react-redux";
 import { selectAuth } from "../redux/auth/selectors";
 import { useAppDispatch } from "../hooks";
 import { logout } from "../redux/auth/slice";
+import Search from "./Search";
 
 const Header: FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const { data } = useSelector(selectAuth);
   const isAuth = Boolean(data);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -65,6 +67,7 @@ const Header: FC = () => {
             <img src={logo2} alt=""/>
             <h1 style={{ marginLeft: '-7px' }}>own</h1>
           </Link>
+          {location.pathname === "/announcement/news" && <Search/>}
           {isAuth
             ?
             <Box sx={{ flexGrow: 0 }}>

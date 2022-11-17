@@ -9,9 +9,13 @@ import { Link } from "react-router-dom";
 import { Modal } from "../index";
 import axios from "../../axios";
 import dayjs from "dayjs";
+import { useSelector } from "react-redux";
+import { selectFilter } from "../../redux/filter/selectors";
+import { Highlighted } from "../../utils";
 
 const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
   const dispatch = useAppDispatch();
+  const { searchValue } = useSelector(selectFilter);
   const [titleEdit, setTitleEdit] = useState('');
   const [contentEdit, setContentEdit] = useState('');
   const [isModalActive, setIsModalActive] = useState(false);
@@ -51,13 +55,18 @@ const NewsItem = ({ _id, title, content, importance, isEditable }: INews) => {
             style={{ background: `linear-gradient(${allImportance[importanceIndex].color}, #d3d3d3)` }}
       />
       <div className="item__title">
-        <h2>{title}</h2>
+        <h2><Highlighted text={title} highlight={searchValue}/></h2>
         {isEditable && <div style={{ display: 'flex' }}>
           <IconButton onClick={onModalClick}><Edit/></IconButton>
           <IconButton onClick={() => onDeleteClick(_id)}><Close/></IconButton>
         </div>}
       </div>
-      <p className="item__text">{content.length > 185 ? slicedContent + '...' : content}</p>
+      <p className="item__text">
+        {content.length > 185
+          ? slicedContent + '...'
+          : <Highlighted text={content} highlight={searchValue}/>
+        }
+      </p>
       <Link to={`/announcement/news/${_id}`}>
         <Button variant="contained">Подробнее</Button>
       </Link>

@@ -10,6 +10,7 @@ import NewsSkeleton from "./NewsSkeleton";
 import { selectAuth } from "../../redux/auth/selectors";
 import DropDown from "../DropDown";
 import { useParams } from "react-router-dom";
+import { selectFilter } from "../../redux/filter/selectors";
 
 const NewsList = () => {
   const dispatch = useAppDispatch();
@@ -17,9 +18,17 @@ const NewsList = () => {
   const filterItems = ['все', 'не очень важно', 'средняя важность', 'очень важно'];
   const { news, status } = useSelector(selectNews);
   const { data } = useSelector(selectAuth);
+  const { searchValue } = useSelector(selectFilter);
   const isNewsLoading = status === StatusEnum.LOADING;
-  const skeletons = [...Array(4)].map((_, index) => <NewsSkeleton key={index}/>);
   const [filteredNews, setFilteredNews] = useState(news);
+  const skeletons = [...Array(4)].map((_, index) => <NewsSkeleton key={index}/>);
+  const searchedNews = (condition ? filteredNews : news)
+    .filter(item => (
+      item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.content.toLowerCase().includes(searchValue.toLowerCase())
+    ))
+    .map(obj => (<NewsItem key={obj._id} {...obj} isEditable={data?._id === obj.user._id}/>))
+    .reverse();
 
   const filteredResult = (categoryItem: string) => {
     if (categoryItem === 'все') {
@@ -43,9 +52,7 @@ const NewsList = () => {
         </div>
       }
       <div className="news__list">
-        {isNewsLoading ? skeletons : (condition ? filteredNews : news).map(obj => (
-          <NewsItem key={obj._id} {...obj} isEditable={data?._id === obj.user._id}/>)).reverse()
-        }
+        {isNewsLoading ? skeletons : searchedNews}
       </div>
     </>
   );

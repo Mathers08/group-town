@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from "../../axios";
 import { toast, ToastContainer } from "react-toastify";
 
-const AddTask = () => {
+const AddTodo = () => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -68,4 +68,4 @@ const AddTask = () => {
   );
 };
 
-export default AddTask;
+export default AddTodo;
