@@ -231,12 +231,12 @@
         font-size: 44px;
         margin-bottom: 15px;
       }
-      textarea {
+      input {
+        position: relative;
         width: 100%;
         height: 70px;
         outline: none;
         border: none;
-        resize: none;
         border-radius: 8px;
         padding: 10px;
       }
@@ -257,8 +257,8 @@
       opacity: .8;
     }
   }
-
 }
+/*
 
 .title {
   input {
@@ -288,4 +288,4 @@
   button {
     margin-right: 15px;
   }
-}
+}*/

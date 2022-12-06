@@ -1,19 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowBack, Chat, Person, Visibility } from '@mui/icons-material';
 import { Avatar, IconButton } from "@mui/material";
 import axios from "../../axios";
-import { allImportance, INews } from "../../redux/news/types";
+import { allImportance, IComment, INews } from "../../redux/news/types";
+import { v4 as uuidv4 } from 'uuid';
+import { useAppDispatch } from "../../hooks";
+import { addComment } from "../../redux/news/slice";
 
 const FullNews = () => {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [item, setItem] = useState<INews>();
+  const [commentText, setCommentText] = useState('');
   const newsTimeInfo = item?.createdAt === item?.updatedTime ? item?.createdAt : item?.updatedTime;
   const importanceIndex = item?.importance && allImportance.map(i => i.title).indexOf(item.importance);
   const indexType = typeof importanceIndex === 'number';
 
   const goBack = () => navigate(-1);
+  const onCommentTextChange = (e: ChangeEvent<HTMLInputElement>) => setCommentText(e.target.value);
+  const onCommentSubmit = async (e: any) => {
+    e.preventDefault();
+    const newComment: IComment = {
+      _id: uuidv4(),
+      user: item?.user,
+      content: commentText
+    };
+    if (commentText) {
+      //await axios.post('/news', newComment);
+      dispatch(addComment({ id: id ? id : '', comment: newComment }));
+      setCommentText('');
+    }
+    console.log(commentText);
+    console.log(item);
+  };
 
   useEffect(() => {
     axios.get(`/news/${id}`)
@@ -63,46 +84,26 @@ const FullNews = () => {
             </ul>
             <div className="full__main-comments">
               <h2>Комментарии</h2>
-              <div className='comment'>
-                <Avatar sx={{ width: 50, height: 50 }} src={item.user.avatarUrl}>
-                  {!item.user.avatarUrl && <Person sx={{ width: 30, height: 30 }}/>}
-                </Avatar>
-                <div className='comment__info'>
-                  <div className='comment__info-author'>
-                    <p>{item.user.firstName} {item.user.lastName}</p>
+              {item.comments.map((comment, index) => (
+                <div key={`${comment._id}_${index}`} className="comment">
+                  <Avatar sx={{ width: 50, height: 50 }} src={comment.user?.avatarUrl}>
+                    {!comment.user?.avatarUrl && <Person sx={{ width: 30, height: 30 }}/>}
+                  </Avatar>
+                  <div className="comment__info">
+                    <div className="comment__info-author">
+                      <p>{comment.user?.firstName} {comment.user?.lastName}</p>
+                    </div>
+                    <h4 className="comment__info-text">{comment.content}</h4>
                   </div>
-                  <h4 className='comment__info-text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti dolorem dolorum, earum error
-                    harum
-                    illo, laboriosam laudantium magnam modi non nulla officia porro, quae ratione totam velit voluptatum?
-                    Accusantium at consectetur deleniti, excepturi facere itaque iusto molestiae obcaecati odio optio
-                    perspiciatis provident quos reiciendis reprehenderit sit sunt tempora totam voluptatem!
-                  </h4>
                 </div>
-              </div>              <div className='comment'>
-                <Avatar sx={{ width: 50, height: 50 }} src={item.user.avatarUrl}>
-                  {!item.user.avatarUrl && <Person sx={{ width: 30, height: 30 }}/>}
-                </Avatar>
-                <div className='comment__info'>
-                  <div className='comment__info-author'>
-                    <p>{item.user.firstName} {item.user.lastName}</p>
-                  </div>
-                  <h4 className='comment__info-text'>Lorem ipsum dolor sit amet, consectetur</h4>
-                </div>
-              </div>              <div className='comment'>
-                <Avatar sx={{ width: 50, height: 50 }} src={item.user.avatarUrl}>
-                  {!item.user.avatarUrl && <Person sx={{ width: 30, height: 30 }}/>}
-                </Avatar>
-                <div className='comment__info'>
-                  <div className='comment__info-author'>
-                    <p>{item.user.firstName} {item.user.lastName}</p>
-                  </div>
-                  <h4 className='comment__info-text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti dolorem dolorum, earum error
-                    harum
-                    illo, laboriosam laudantium magnam modi non nulla officia porro, quae ratione totam velit voluptatum?
-                  </h4>
-                </div>
-              </div>
-              <textarea name="comment" placeholder="Оставьте комментарий..."/>
+              ))}
+              <form onSubmit={onCommentSubmit}>
+                <input
+                  value={commentText}
+                  onChange={onCommentTextChange}
+                  placeholder="Оставьте комментарий..."
+                />
+              </form>
             </div>
           </div>
         </>

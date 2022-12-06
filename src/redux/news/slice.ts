@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { INews, NewsState } from "./types";
+import { IComment, INews, NewsState } from "./types";
 import { StatusEnum } from "../auth/types";
 import axios from "../../axios";
 
@@ -25,6 +25,18 @@ export const slice = createSlice({
     addNews: (state, action: PayloadAction<INews>) => {
       state.news.unshift(action.payload);
     },
+    addComment: (state, action: PayloadAction<{ id: string, comment: IComment }>) => {
+      const singleNews = state.news.find(n => n._id === action.payload.id);
+      if (singleNews) {
+        singleNews.comments.push(action.payload.comment);
+      }
+    },
+    deleteComment: (state, action: PayloadAction<{ id: string, comment: IComment }>) => {
+      const singleNews = state.news.find(n => n._id === action.payload.id);
+      if (singleNews) {
+        singleNews.comments = singleNews.comments.filter(c => c._id !== action.payload.id);
+      }
+    }
   },
   extraReducers: builder => {
     builder.addCase(fetchNews.pending, (state) => {
@@ -48,5 +60,7 @@ export const slice = createSlice({
 
 export const {
   addNews,
+  addComment,
+  deleteComment
 } = slice.actions;
 export default slice.reducer;

@@ -30,6 +30,12 @@ export const allImportance = [
   },
 ];
 
+export interface IComment {
+  _id: string;
+  user?: IUser;
+  content: string;
+}
+
 export interface INews {
   _id: string;
   title: string;
@@ -40,6 +46,7 @@ export interface INews {
   createdAt: string;
   updatedTime: string;
   isEditable: boolean;
+  comments: IComment[];
 }
 
 export interface NewsState {

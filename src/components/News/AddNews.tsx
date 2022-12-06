@@ -2,16 +2,18 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import "./News.scss";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useAppDispatch } from "../../hooks";
-import { allImportance, NewsImportanceEnum } from "../../redux/news/types";
-import { formatDate } from "../../utils";
+import { allImportance } from "../../redux/news/types";
 import { Button } from "@mui/material";
 import axios from "../../axios";
 import { toast, ToastContainer } from "react-toastify";
 import dayjs from "dayjs";
+import { v4 as uuidv4 } from 'uuid';
+import { useSelector } from "react-redux";
+import { selectAuth } from "../../redux/auth/selectors";
 
 const AddNews = () => {
   const dispatch = useAppDispatch();
-
+  const { data } = useSelector(selectAuth);
   const [isFocused, setIsFocused] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(-1);
@@ -34,6 +36,7 @@ const AddNews = () => {
       importance,
       createdAt: dayjs().format('D MMMM YYYY HH:mm'),
       updatedTime: dayjs().format('D MMMM YYYY HH:mm'),
+      comments: []
     };
     if (title.trim() && content.trim() && importance) {
       await axios.post('/news', newItem);

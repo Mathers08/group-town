@@ -4,6 +4,7 @@ import news from './news/slice';
 import schedule from './schedule/slice';
 import auth from './auth/slice';
 import filter from './filter/slice';
+import performance from './performance/slice';
 
 export const setupStore = () => configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const setupStore = () => configureStore({
     news,
     schedule,
     auth,
-    filter
+    filter,
+    performance,
   },
 });
 
